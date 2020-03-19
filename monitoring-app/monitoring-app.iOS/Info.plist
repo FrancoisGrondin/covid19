@@ -34,5 +34,7 @@
     <string>monitoring_app</string>
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/AppIcon.appiconset</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Track your position.</string>
 </dict>
 </plist>

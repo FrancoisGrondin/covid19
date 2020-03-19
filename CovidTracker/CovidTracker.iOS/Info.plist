@@ -23,15 +23,15 @@
     <key>MinimumOSVersion</key>
     <string>8.0</string>
     <key>CFBundleDisplayName</key>
-    <string>monitoring_app</string>
+    <string>CovidTracker</string>
     <key>CFBundleIdentifier</key>
-    <string>io.emanso.covid19</string>
+    <string>io.emanso.CovidTracker</string>
     <key>CFBundleVersion</key>
     <string>1.0</string>
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
     <key>CFBundleName</key>
-    <string>monitoring_app</string>
+    <string>CovidTracker</string>
     <key>XSAppIconAssets</key>
     <string>Assets.xcassets/AppIcon.appiconset</string>
     <key>NSLocationWhenInUseUsageDescription</key>

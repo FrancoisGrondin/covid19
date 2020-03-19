@@ -5,13 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9D129522-A1EC-4C5D-A0E3-3ECEA693785E}</ProjectGuid>
+    <ProjectGuid>{8B0A0DDA-62CD-4B5F-AA10-BDE1F8AB11B9}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>monitoring_app.iOS</RootNamespace>
+    <RootNamespace>CovidTracker.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>monitoring_app.iOS</AssemblyName>
+    <AssemblyName>CovidTracker.iOS</AssemblyName>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
   </PropertyGroup>
@@ -127,9 +127,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\monitoringapp\monitoringapp.csproj">
-      <Project>{AE8271F6-8D22-477B-A6E2-07FA019D6965}</Project>
-      <Name>monitoringapp</Name>
+    <ProjectReference Include="..\CovidTracker\CovidTracker.csproj">
+      <Project>{6D1B3163-BF52-46EC-B9B4-3E2B87F77649}</Project>
+      <Name>CovidTracker</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

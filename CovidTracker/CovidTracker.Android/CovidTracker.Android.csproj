@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0303807A-94C3-4250-8526-E8DD6CE889F1}</ProjectGuid>
+    <ProjectGuid>{D1460802-C17D-48A1-9632-00B55787D4D1}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>monitoring_app.Droid</RootNamespace>
-    <AssemblyName>monitoring_app.Android</AssemblyName>
+    <RootNamespace>CovidTracker.Droid</RootNamespace>
+    <AssemblyName>CovidTracker.Android</AssemblyName>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -87,9 +87,9 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\monitoringapp\monitoringapp.csproj">
-      <Project>{AE8271F6-8D22-477B-A6E2-07FA019D6965}</Project>
-      <Name>monitoringapp</Name>
+    <ProjectReference Include="..\CovidTracker\CovidTracker.csproj">
+      <Project>{6D1B3163-BF52-46EC-B9B4-3E2B87F77649}</Project>
+      <Name>CovidTracker</Name>
     </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

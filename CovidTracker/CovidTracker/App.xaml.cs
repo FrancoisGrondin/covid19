@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace monitoring_app
+namespace CovidTracker
 {
     public partial class App : Application
     {

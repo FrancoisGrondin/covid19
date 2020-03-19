@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace monitoring_app
+namespace CovidTracker
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
@@ -16,6 +16,8 @@ namespace monitoring_app
         public MainPage()
         {
             InitializeComponent();
+            GeoTracker geoTracker = new GeoTracker();
+            geoTracker.GetLocationAsync();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace monitoring_app.iOS
+namespace CovidTracker.iOS
 {
     public class Application
     {

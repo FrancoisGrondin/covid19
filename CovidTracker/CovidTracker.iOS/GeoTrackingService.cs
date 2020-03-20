@@ -42,7 +42,6 @@ namespace CovidTracker.iOS
 
                 LocMgr.LocationsUpdated += async (object sender, CLLocationsUpdatedEventArgs e) => {
                     // fire our custom Location Updated event
-                    LocMgr.StopUpdatingLocation();
                     foreach (CLLocation location in e.Locations) {
                         await DeviceLocation.SendLocationInformationToServer(location.Coordinate.Longitude, location.Coordinate.Latitude,
                                                                        location.Altitude, location.Course, location.Speed);

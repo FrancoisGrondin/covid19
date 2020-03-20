@@ -2,8 +2,10 @@ TODO APP
 ========
 
     - Enregistrement au serveur et récupération Id
-    - Bouton 'symptoms' et envoie au serveur
-    - Bouton 'action' et réception des infos du serveur
+    - Bouton 'symptoms' : formulaire et envoie au serveur
+    - Bouton 'action' : réception des infos du serveur et les afficher
+    - Accumulate coordinates and send as a batch once the buffer is full
+    - Localize app !
     - Icône d'application
 
 

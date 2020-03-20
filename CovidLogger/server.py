@@ -4,26 +4,6 @@ import json
 import os
 import argparse
 
-def log(root, user, operating, timestamp, latitude, longitude, altitude, speed, course):
-
-	csv = root + user[0] + '/' + user[1] + '/' + user[2] + '/' + user + '.csv'
-
-	folder = os.path.dirname(csv)
-
-	if not os.path.exists(folder):
-		os.makedirs(folder)
-
-	if not os.path.exists(csv):
-		with open(csv,'a') as fd:
-			fd.write('timestamp,os,latitude,longitude,altitude,speed,course\n')	
-
-	with open(csv,'a') as fd:
-		fd.write('%u,%s,%d,%d,%d,%d,%d\n' % (timestamp,operating,latitude,longitude,altitude,speed,course))	
-
-def register(root):
-
-	return
-
 class RequestHandler(BaseHTTPRequestHandler):
 
 	def do_POST(self):
@@ -32,17 +12,45 @@ class RequestHandler(BaseHTTPRequestHandler):
 		post_body = self.rfile.read(content_len)
 		data = json.loads(post_body)
 
-		for element in data:
+		# Get user id
+		user = data['id']
 
-			log(root=root, 
-				user=element['Id'],
-				operating=element['Os'],
-				timestamp=element['Timestamp'],
-				latitude=element['Latitude'],
-				longitude=element['Longitude'],
-				altitude=element['Altitude'],
-				speed=element['Speed'],
-				course=element['Course'])
+		# Get action
+		action = data['action']
+
+		# Perform corresponding logging
+		if action == 'track':
+
+			# Generate the CSV file path
+			csv = root + user[0] + '/' + user[1] + '/' + user[2] + '/' + user + '.csv'
+
+			# If directory does not exist, create it
+			folder = os.path.dirname(csv)
+			if not os.path.exists(folder):
+				os.makedirs(folder)
+
+			# Empty string that will hold all fields to write to file
+			expr = ''
+
+			# If file does not exist, then first add the headers
+			if not os.path.exists(csv):
+				with open(csv,'a') as fd:
+					expr += 'timestamp,latitude,longitude,radius,speed,course\n'
+
+			# Now loop in each element and extract content
+			for element in data['data']:
+
+				tup = (	element['timestamp'], 
+						element['latitude'], 
+						element['longitude'], 
+						element['radius'], 
+						element['speed'], 
+						element['course'])
+				expr += '%u,%d,%d,%d,%d,%d\n' % tup
+
+			# Finally, do a single dump in the file
+			with open(csv,'a') as fd:
+				fd.write(expr)			
 
 		self.send_response(200)
 		self.end_headers()

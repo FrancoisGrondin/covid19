@@ -11,12 +11,14 @@ namespace CovidTracker
     {
         public static string Id = null;
         public static string Os = null;
-        public long timestamp;
+        public long Timestamp;
         public double Latitude;
         public double Longitude;
         public double? Altitude;
+        public double? Speed;
+        public double? Course;
 
-        private DeviceLocation(double latitude, double longitude, double? altitude)
+        private DeviceLocation(long timestamp, double latitude, double longitude, double? altitude, double? speed, double? course)
         {
             if (Id == null) {
                 Id = Preferences.Get("COVID_TRACKER_ID", "null");
@@ -29,10 +31,12 @@ namespace CovidTracker
                     Os = "Android";
                 }
             }
-            timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            Timestamp = timestamp;
             Latitude = latitude;
             Longitude = longitude;
             Altitude = altitude;
+            Speed = speed;
+            Course = course;
         }
 
         private static async Task<DeviceLocation> GetDeviceLocationObject()
@@ -44,7 +48,8 @@ namespace CovidTracker
                 Location location = await Geolocation.GetLocationAsync(request);
 
                 if (location != null) {
-                    deviceLocation = new DeviceLocation(location.Latitude, location.Longitude, location.Altitude);
+                    deviceLocation = new DeviceLocation(location.Timestamp.ToUnixTimeMilliseconds(), location.Latitude, location.Longitude,
+                                                        location.Altitude, location.Speed, location.Course);
                 }
             }
             catch (FeatureNotSupportedException fnsEx) {
@@ -65,7 +70,8 @@ namespace CovidTracker
 
         public static async Task SendLocationInformationToServer()
         {
-            DeviceLocation deviceLocation = await GetDeviceLocationObject();
+            DeviceLocation[] deviceLocation = new DeviceLocation[1];
+            deviceLocation[0] = await GetDeviceLocationObject();
             if (deviceLocation == null) {
                 return;
             }

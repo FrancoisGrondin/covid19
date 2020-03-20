@@ -16,8 +16,6 @@ namespace CovidTracker
         public MainPage()
         {
             InitializeComponent();
-            GeoTracker geoTracker = new GeoTracker();
-            geoTracker.GetLocationAsync();
         }
     }
 }

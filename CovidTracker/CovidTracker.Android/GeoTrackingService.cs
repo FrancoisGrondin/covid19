@@ -30,8 +30,8 @@ namespace CovidTracker.Droid
             Log.Info(TAG, "GeoTrackingService initializing");
             handler = new Handler();
 
-            runnable = new Action(() => {
-                Log.Debug(TAG + " " + DateTime.Now, MESSAGE);
+            runnable = new Action(async () => {
+                await DeviceLocation.SendLocationInformationToServer();
                 Intent i = new Intent(NOTIFICATION_BROADCAST_ACTION);
                 i.PutExtra(BROADCAST_MESSAGE_KEY, MESSAGE);
                 Android.Support.V4.Content.LocalBroadcastManager.GetInstance(this).SendBroadcast(i);
@@ -74,7 +74,7 @@ namespace CovidTracker.Droid
             Notification notification = new Notification.Builder(this)
                 .SetContentTitle(SERVICE_NAME)
                 .SetContentText(MESSAGE)
-                //.SetSmallIcon(Resource.Drawable.cleard)
+                //.SetSmallIcon(Resource.Drawable.ServiceIcon)
                 .SetOngoing(true)
                 .Build();
             StartForeground(SERVICE_RUNNING_NOTIFICATION_ID, notification);

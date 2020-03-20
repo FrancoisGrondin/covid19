@@ -9,7 +9,7 @@ namespace CovidTracker.Droid
     [Service]
     public class GeoTrackingService : Service
     {
-        private int MILLISECONDS_BETWEEN_LOCATION_QUERY = 2000;
+        private int MILLISECONDS_BETWEEN_LOCATION_QUERY = 1000;
         public const int SERVICE_RUNNING_NOTIFICATION_ID = 10000;
         public const string SERVICE_NAME = "CovidTracker";
         public const string ACTION_START_SERVICE = "CovidTracker.START_TRACKING";

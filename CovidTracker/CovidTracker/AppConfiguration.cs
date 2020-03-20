@@ -17,7 +17,17 @@ namespace CovidTracker
         public static readonly string BG_DARK = "#343a40";
         public static readonly string BG_WHITE = "#ffffff";
 
-        /* DO NOT CHANGE THE LINES BELOW
+
+        /* ---------------------------------------------------------------------------------- 
+         * SERVERS CONFIGURATION
+         */
+
+        public static readonly UriBuilder REGISTRATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 3000);
+        public static readonly UriBuilder LOCATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 8000);
+
+
+        /* ---------------------------------------------------------------------------------- 
+         * DO NOT CHANGE THE LINES BELOW
          * Instead, run version.sh <version number>
          *     E.g.
          *     $ ./version.sh 2.0.33

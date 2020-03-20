@@ -4,6 +4,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Net.Http;
 
 namespace CovidTracker
 {
@@ -11,6 +12,7 @@ namespace CovidTracker
     {
         public static string StaticId = null;
         public static string StaticOs = null;
+        public string Action;
         public string Id;
         public string Os;
         public long Timestamp;
@@ -23,7 +25,7 @@ namespace CovidTracker
         private DeviceLocation(double latitude, double longitude, double? altitude, double? speed, double? course)
         {
             if (StaticId == null) {
-                StaticId = Preferences.Get("COVID_TRACKER_ID", null);
+                StaticId = Preferences.Get("COVID_TRACKER_ID", "testingId");
             }
             if (StaticOs == null) {
                 if (Device.RuntimePlatform == Device.iOS) {
@@ -33,6 +35,7 @@ namespace CovidTracker
                     StaticOs = "Android";
                 }
             }
+            Action = "track";
             Id = StaticId;
             Os = StaticOs;
             Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
@@ -95,8 +98,22 @@ namespace CovidTracker
 
         public static async Task SendDeviceLocationToServer(DeviceLocation[] deviceLocation)
         {
-            String jsonString = JsonConvert.SerializeObject(deviceLocation);
-            Debug.WriteLine(jsonString);
+            try {
+                HttpClient client = new HttpClient();
+                string data = JsonConvert.SerializeObject(deviceLocation);
+                Debug.WriteLine("jsonString: " + data, "[SendDeviceLocationToServer]");
+                HttpResponseMessage response = await client.PostAsync(AppConfiguration.LOCATION_SERVER_URL.Uri, new StringContent(data));
+                if (response.IsSuccessStatusCode) {
+                    Debug.WriteLine("Success", "[SendDeviceLocationToServer]");
+                }
+                else {
+                    Debug.WriteLine("FAILED: " + response.ReasonPhrase, "[SendDeviceLocationToServer]");
+                }
+            }
+            catch (Exception e) {
+                Debug.WriteLine("Exception: " + e.Message, "[SendDeviceLocationToServer]");
+            }
+
         }
 
     }

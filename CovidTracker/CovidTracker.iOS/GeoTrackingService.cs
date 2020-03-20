@@ -39,7 +39,7 @@ namespace CovidTracker.iOS
                 LocationManager.LocationsUpdated += (object sender, CLLocationsUpdatedEventArgs e) => {
                     foreach (CLLocation location in e.Locations) {
                         DeviceLocation.SendLocationInformationToServer(location.Coordinate.Longitude, location.Coordinate.Latitude,
-                                                                             location.Altitude, location.Course, location.Speed, location.HorizontalAccuracy);
+                                                                       location.Course, location.Speed, location.HorizontalAccuracy);
                     }
                 };
 

@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
-using Xamarin.Forms;
-using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace CovidTracker
 {
@@ -12,18 +12,17 @@ namespace CovidTracker
     {
         public static string StaticId = null;
         public static string StaticOs = null;
-        public string Action;
-        public string Id;
-        public string Os;
-        public long Timestamp;
-        public double Latitude;
-        public double Longitude;
-        public double? Altitude;
-        public double? Speed;
-        public double? Course;
-        public double? Accuracy;
+        public string action;
+        public string id;
+        public string os;
+        public long timestamp;
+        public double latitude;
+        public double longitude;
+        public double? speed;
+        public double? course;
+        public double? accuracy;
 
-        private DeviceLocation(double latitude, double longitude, double? altitude, double? speed, double? course, double? accuracy)
+        private DeviceLocation(double latitude, double longitude, double? speed, double? course, double? accuracy)
         {
             if (StaticId == null) {
                 StaticId = Preferences.Get("COVID_TRACKER_ID", "testingId");
@@ -37,25 +36,24 @@ namespace CovidTracker
                 }
             }
 
-            Action = "track";
-            Id = StaticId;
-            Os = StaticOs;
-            Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            Latitude = latitude;
-            Longitude = longitude;
+            action = "track";
+            id = StaticId;
+            os = StaticOs;
+            timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            this.latitude = latitude;
+            this.longitude = longitude;
 
             // TODO -- Remove the checks once the server will deal with 'null'
-            Altitude = altitude != null ? altitude : 0;
-            Speed = speed != null ? speed : 0;
-            Course = course != null ? course : 0;
-            Accuracy = accuracy != null ? accuracy : 0;
+            this.speed = speed != null ? speed : 0;
+            this.course = course != null ? course : 0;
+            this.accuracy = accuracy != null ? accuracy : 0;
         }
 
-        public static async Task SendLocationInformationToServer(double latitude, double longitude, double? altitude,
+        public static async Task SendLocationInformationToServer(double latitude, double longitude,
                                                                  double? speed, double? course, double? accuracy)
         {
             DeviceLocation[] deviceLocation = new DeviceLocation[1];
-            deviceLocation[0] = new DeviceLocation(latitude, longitude, altitude, speed, course, accuracy);
+            deviceLocation[0] = new DeviceLocation(latitude, longitude, speed, course, accuracy);
 
             await SendDeviceLocationToServer(deviceLocation);
         }

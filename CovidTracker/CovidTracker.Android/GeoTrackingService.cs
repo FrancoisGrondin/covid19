@@ -92,7 +92,7 @@ namespace CovidTracker.Droid
 
         public void OnLocationChanged(Location location)
         {
-            DeviceLocation.SendLocationInformationToServer(location.Longitude, location.Latitude, location.Altitude,
+            DeviceLocation.SendLocationInformationToServer(location.Longitude, location.Latitude,
                                                            location.Bearing, location.Speed, location.Accuracy);
         }
 

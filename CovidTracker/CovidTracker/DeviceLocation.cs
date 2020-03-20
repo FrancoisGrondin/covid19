@@ -20,10 +20,10 @@ namespace CovidTracker
         public double? Speed;
         public double? Course;
 
-        private DeviceLocation(long timestamp, double latitude, double longitude, double? altitude, double? speed, double? course)
+        private DeviceLocation(double latitude, double longitude, double? altitude, double? speed, double? course)
         {
             if (StaticId == null) {
-                StaticId = Preferences.Get("COVID_TRACKER_ID", "testingId");
+                StaticId = Preferences.Get("COVID_TRACKER_ID", null);
             }
             if (StaticOs == null) {
                 if (Device.RuntimePlatform == Device.iOS) {
@@ -35,12 +35,33 @@ namespace CovidTracker
             }
             Id = StaticId;
             Os = StaticOs;
-            Timestamp = timestamp;
+            Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             Latitude = latitude;
             Longitude = longitude;
             Altitude = altitude;
             Speed = speed;
             Course = course;
+        }
+
+        // Called by iOS
+        public static async Task SendLocationInformationToServer(double latitude, double longitude,
+                                                                 double? altitude, double? speed, double? course)
+        {
+            DeviceLocation[] deviceLocation = new DeviceLocation[1];
+            deviceLocation[0] = new DeviceLocation(latitude, longitude, altitude, speed, course);
+
+            await SendDeviceLocationToServer(deviceLocation);
+        }
+
+        // Called by Android
+        public static async Task SendLocationInformationToServer()
+        {
+            DeviceLocation[] deviceLocation = new DeviceLocation[1];
+            deviceLocation[0] = await GetDeviceLocationObject();
+            if (deviceLocation == null) {
+                return;
+            }
+            await SendDeviceLocationToServer(deviceLocation);
         }
 
         private static async Task<DeviceLocation> GetDeviceLocationObject()
@@ -52,7 +73,7 @@ namespace CovidTracker
                 Location location = await Geolocation.GetLocationAsync(request);
 
                 if (location != null) {
-                    deviceLocation = new DeviceLocation(location.Timestamp.ToUnixTimeMilliseconds(), location.Latitude, location.Longitude,
+                    deviceLocation = new DeviceLocation(location.Latitude, location.Longitude,
                                                         location.Altitude, location.Speed, location.Course);
                 }
             }
@@ -72,18 +93,10 @@ namespace CovidTracker
             return deviceLocation;
         }
 
-        public static async Task SendLocationInformationToServer()
+        public static async Task SendDeviceLocationToServer(DeviceLocation[] deviceLocation)
         {
-            DeviceLocation[] deviceLocation = new DeviceLocation[1];
-            deviceLocation[0] = await GetDeviceLocationObject();
-            if (deviceLocation == null) {
-                return;
-            }
-
             String jsonString = JsonConvert.SerializeObject(deviceLocation);
             Debug.WriteLine(jsonString);
-
-
         }
 
     }

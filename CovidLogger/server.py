@@ -34,8 +34,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 			# If file does not exist, then first add the headers
 			if not os.path.exists(csv):
-				with open(csv,'a') as fd:
-					expr += 'timestamp,latitude,longitude,accuracy,speed,course\n'
+				expr += 'timestamp,latitude,longitude,accuracy,speed,course\n'
 
 			# Now loop in each element and extract content
 			for element in data['data']:

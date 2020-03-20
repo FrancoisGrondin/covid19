@@ -27,5 +27,16 @@ namespace CovidTracker.iOS
             LoadApplication(new App());
             return base.FinishedLaunching(app, options);
         }
+
+        public override void DidEnterBackground(UIApplication application)
+        {
+            Console.WriteLine("App entering background state.");
+        }
+
+        public override void WillEnterForeground(UIApplication application)
+        {
+            Console.WriteLine("App will enter foreground");
+        }
+
     }
 }

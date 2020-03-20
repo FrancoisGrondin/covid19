@@ -9,8 +9,10 @@ namespace CovidTracker
 {
     public class DeviceLocation
     {
-        public static string Id = null;
-        public static string Os = null;
+        public static string StaticId = null;
+        public static string StaticOs = null;
+        public string Id;
+        public string Os;
         public long Timestamp;
         public double Latitude;
         public double Longitude;
@@ -20,17 +22,19 @@ namespace CovidTracker
 
         private DeviceLocation(long timestamp, double latitude, double longitude, double? altitude, double? speed, double? course)
         {
-            if (Id == null) {
-                Id = Preferences.Get("COVID_TRACKER_ID", "null");
+            if (StaticId == null) {
+                StaticId = Preferences.Get("COVID_TRACKER_ID", "testingId");
             }
-            if (Os == null) {
+            if (StaticOs == null) {
                 if (Device.RuntimePlatform == Device.iOS) {
-                    Os = "iOS";
+                    StaticOs = "iOS";
                 }
                 else {
-                    Os = "Android";
+                    StaticOs = "Android";
                 }
             }
+            Id = StaticId;
+            Os = StaticOs;
             Timestamp = timestamp;
             Latitude = latitude;
             Longitude = longitude;

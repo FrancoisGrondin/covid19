@@ -1,7 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="CovidTracker.MainPage">
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:l="clr-namespace:CovidTracker"
+    x:Class="CovidTracker.MainPage"
+            BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
+
+>
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+
+        <Label
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="StartAndExpand"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            FontAttributes="Bold"
+            FontSize="Title"
+            TextColor="{Binding Source={x:Static l:AppConfiguration.BG_WHITE}}"
+            Text="Covid Tracker"
+            Padding="5"
+            BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_INFO}}"
+        />
+
+        <Frame
+            Margin="20, 0, 20, 0"
+            CornerRadius="15"
+            HasShadow="False"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_LIGHT}}"
+        >
+            <Label
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                FontSize="Large"
+                TextColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
+                Text="Whatever relevant information we'd like to add about Covid Tracker"
+                Padding="10"
+            />
+        </Frame>
+
+
+        <StackLayout
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="EndAndExpand"
+            Spacing="20"
+            Margin="0, 0, 0, 20"
+        >
+            <Button
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
+                Padding="10"
+                CornerRadius="10"
+                TextColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
+                FontSize="Large"
+                Text="I have Symptoms"
+                BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_WARNING}}"
+            />
+
+            <Button
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"
+                Padding="10"
+                CornerRadius="10"
+                TextColor="White"
+                FontSize="Large"
+                Text="Am I at Risk?"
+                BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_PRIMARY}}"
+            />
+        </StackLayout>
+
     </StackLayout>
 </ContentPage>

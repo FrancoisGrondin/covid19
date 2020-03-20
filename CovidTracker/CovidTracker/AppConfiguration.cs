@@ -15,6 +15,7 @@ namespace CovidTracker
         public static readonly string BG_INFO = "#17a2b8";
         public static readonly string BG_LIGHT = "#f8f9fa";
         public static readonly string BG_DARK = "#343a40";
+        public static readonly string BG_BLACK = "#000000";
         public static readonly string BG_WHITE = "#ffffff";
 
 

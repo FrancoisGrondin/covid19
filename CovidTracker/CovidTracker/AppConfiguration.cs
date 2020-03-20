@@ -27,12 +27,12 @@ namespace CovidTracker
 
         // MINIMUM_TIME_MS milliseconds must have elapsed for the 
         // device to trigger a location change (Android only)
-        public static readonly int MINIMUM_TIME_MS = 5000;
+        public static readonly int MINIMUM_TIME_MS = 0;
 
         // The location must have changed by at least a distance
         // of MINIMUM_DISTANCE_M meters for the device to trigger
         // a location change (Android, iOS)
-        public static readonly int MINIMUM_DISTANCE_M = 0;
+        public static readonly int MINIMUM_DISTANCE_M = 2;
 
 
         /* ---------------------------------------------------------------------------------- 

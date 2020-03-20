@@ -36,6 +36,8 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Track phone position</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Track phone position</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Track phone position</string>
 	<key>UIBackgroundModes</key>

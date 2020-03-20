@@ -21,7 +21,7 @@
             FontSize="Title"
             TextColor="{Binding Source={x:Static l:AppConfiguration.BG_WHITE}}"
             Text="Covid Tracker"
-            Padding="5"
+            Padding="10"
             BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_INFO}}"
         />
 
@@ -62,23 +62,25 @@
             <Button
                 Grid.Row="0"
                 Grid.Column="0"
-                Padding="20, 10, 20, 10"
+                Padding="20"
                 CornerRadius="10"
                 TextColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
                 FontSize="Large"
                 Text="I have Symptoms"
                 BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_WARNING}}"
+                Clicked="ClickedSymptoms"
             />
 
             <Button
                 Grid.Row="1"
                 Grid.Column="0"
-                Padding="20, 10, 20, 10"
+                Padding="20"
                 CornerRadius="10"
                 TextColor="White"
                 FontSize="Large"
                 Text="Am I at Risk?"
                 BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_PRIMARY}}"
+                Clicked="ClickedRisk"
             />
         </Grid>
 

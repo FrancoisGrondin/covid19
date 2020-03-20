@@ -3,7 +3,7 @@
 	"action": "track",
 	"data":
 	[
-		{"timestamp": 1584722908, "latitude": 45.4042, "longitude": 71.8929, "radius": 10.0, "speed": 1.0, "course": 15.0},
-		{"timestamp": 1584723208, "latitude": 45.4042, "longitude": 71.8929, "radius": 10.0, "speed": 0.0, "course": 25.0}
+		{"timestamp": 1584722908, "latitude": 45.4042, "longitude": 71.8929, "accuracy": 10.0, "speed": 1.0, "course": 15.0},
+		{"timestamp": 1584723208, "latitude": 45.4042, "longitude": 71.8929, "accuracy": 10.0, "speed": 0.0, "course": 25.0}
 	]
 }

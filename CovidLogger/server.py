@@ -18,7 +18,7 @@ def log(root, user, operating, timestamp, latitude, longitude, altitude, speed, 
 			fd.write('timestamp,os,latitude,longitude,altitude,speed,course\n')	
 
 	with open(csv,'a') as fd:
-		fd.write('%u,%s,%d,%d,%d,%d,%d\n' % (timestamp,operating,latitude,longitude,altitude,speed,course))	
+		fd.write('%u,%s,%f,%f,%f,%f,%f\n' % (timestamp,operating,latitude,longitude,altitude,speed,course))	
 
 def register(root):
 

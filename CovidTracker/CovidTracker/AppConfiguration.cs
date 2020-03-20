@@ -25,6 +25,15 @@ namespace CovidTracker
         public static readonly UriBuilder REGISTRATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 3000);
         public static readonly UriBuilder LOCATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 8000);
 
+        // MINIMUM_TIME_MS milliseconds must have elapsed for the 
+        // device to trigger a location change (Android only)
+        public static readonly int MINIMUM_TIME_MS = 1000;
+
+        // The location must have changed by at least a distance
+        // of MINIMUM_DISTANCE_M meters for the device to trigger
+        // a location change (Android, iOS)
+        public static readonly int MINIMUM_DISTANCE_M = 2;
+
 
         /* ---------------------------------------------------------------------------------- 
          * DO NOT CHANGE THE LINES BELOW

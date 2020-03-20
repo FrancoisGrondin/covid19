@@ -1,4 +1,4 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer, ThreadingHTTPServer
 from urllib.parse import urlparse
 import json
 import os
@@ -8,7 +8,6 @@ def log(root, user, operating, timestamp, latitude, longitude, altitude, speed, 
 
 	csv = root + user[0] + '/' + user[1] + '/' + user[2] + '/' + user + '.csv'
 
-	print(csv)
 	folder = os.path.dirname(csv)
 
 	if not os.path.exists(folder):
@@ -26,14 +25,6 @@ def register(root):
 	return
 
 class RequestHandler(BaseHTTPRequestHandler):
-
-	def do_GET(self):
-
-		self.send_response(200)
-		self.end_headers()
-		self.wfile.write(('get').encode())
-
-		return
 
 	def do_POST(self):
 
@@ -65,5 +56,5 @@ if args.root == "":
     raise Exception("Invalid root directory")		
 
 root = args.root
-server = HTTPServer(('localhost', 8000), RequestHandler)
+server = ThreadingHTTPServer(('localhost', 8000), RequestHandler)
 server.serve_forever()

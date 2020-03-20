@@ -17,5 +17,15 @@ namespace CovidTracker
         {
             InitializeComponent();
         }
+
+        void ClickedSymptoms(System.Object sender, System.EventArgs e)
+        {
+            DisplayAlert("Got it!", "Thank you for letting us know. This information will stay confidential.", "OK");
+        }
+
+        void ClickedRisk(System.Object sender, System.EventArgs e)
+        {
+            DisplayAlert("Your risk level", "According to our calculations your risk is X. [plus additional recommandations]", "OK");
+        }
     }
 }

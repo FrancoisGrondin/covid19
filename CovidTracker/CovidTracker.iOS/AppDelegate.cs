@@ -23,9 +23,20 @@ namespace CovidTracker.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            new GeoTrackingService().StartLocationUpdates();
             LoadApplication(new App());
-
             return base.FinishedLaunching(app, options);
         }
+
+        public override void DidEnterBackground(UIApplication application)
+        {
+            Console.WriteLine("App entering background state.");
+        }
+
+        public override void WillEnterForeground(UIApplication application)
+        {
+            Console.WriteLine("App will enter foreground");
+        }
+
     }
 }

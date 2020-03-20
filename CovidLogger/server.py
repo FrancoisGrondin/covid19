@@ -21,8 +21,8 @@ class RequestHandler(BaseHTTPRequestHandler):
 		# Perform corresponding logging
 		if action == 'track':
 
-	with open(csv,'a') as fd:
-		fd.write('%u,%s,%f,%f,%f,%f,%f\n' % (timestamp,operating,latitude,longitude,altitude,speed,course))	
+			with open(csv,'a') as fd:
+				fd.write('%u,%f,%f,%f,%f,%f\n' % (timestamp,latitude,longitude,accuracy,speed,course))	
 
 			# Generate the CSV file path
 			csv = root + user[0] + '/' + user[1] + '/' + user[2] + '/' + user + '.csv'

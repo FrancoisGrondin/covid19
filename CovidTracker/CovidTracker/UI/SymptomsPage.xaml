@@ -80,17 +80,46 @@
                 </StackLayout>
             </ScrollView>
 
-            <Button
+            <Grid
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="EndAndExpand"
+                ColumnSpacing="20"
                 Margin="0, 0, 0, 20"
-                Padding="40, 20, 40, 20"
-                CornerRadius="10"
-                TextColor="White"
-                FontSize="Large"
-                Text="Report"
-                BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_PRIMARY}}"
-            />
+                Padding="20, 0, 20, 0"
+            >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Padding="20"
+                    CornerRadius="10"
+                    TextColor="{Binding Source={x:Static l:AppConfiguration.BG_WHITE}}"
+                    FontSize="Large"
+                    Text="Cancel"
+                    BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_DANGER}}"
+                    Command="{Binding CancelCommand}"
+                />
+
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Padding="20"
+                    CornerRadius="10"
+                    TextColor="{Binding Source={x:Static l:AppConfiguration.BG_WHITE}}"
+                    FontSize="Large"
+                    Text="Report"
+                    BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_SUCCESS}}"
+                    Command="{Binding ReportSymptomsCommand}"
+                />
+            </Grid>
 
         </StackLayout>
     </Frame>

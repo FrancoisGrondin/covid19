@@ -8,7 +8,7 @@ namespace CovidTracker
 {
     public class Symptom : INotifyPropertyChanged
     {
-        private string ID;
+        public string Id { get; set; }
         public string Description { get; set; }
 
         private bool _isChecked;
@@ -18,23 +18,22 @@ namespace CovidTracker
             }
             set {
                 _isChecked = value;
-                Preferences.Set(ID, _isChecked);
+                Preferences.Set(Id, _isChecked);
                 OnPropertyChanged("IsChecked");
 
             }
         }
 
 
-        public Symptom(string ID, string Description)
+        public Symptom(string Id, string Description)
         {
-            this.ID = ID;
+            this.Id = Id;
             this.Description = Description;
-            this._isChecked = Preferences.Get(ID, false);
+            this._isChecked = Preferences.Get(Id, false);
         }
 
 
         public ICommand TapCommand => new Command(Tapped);
-
         void Tapped()
         {
             IsChecked = !IsChecked;

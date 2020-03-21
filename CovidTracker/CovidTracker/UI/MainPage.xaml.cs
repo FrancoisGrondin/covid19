@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Threading;
 using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
 
@@ -15,6 +11,7 @@ namespace CovidTracker
     public partial class MainPage : ContentPage
     {
         private SymptomsPage SymptomsPage;
+        private int ButtonLock;
 
         private SymptomsPage GetSymptomsPage()
         {
@@ -30,15 +27,20 @@ namespace CovidTracker
             InitializeComponent();
         }
 
-        void ClickedSymptoms(System.Object sender, System.EventArgs e)
+        async void ClickedSymptoms(System.Object sender, System.EventArgs e)
         {
-            Navigation.PushPopupAsync(GetSymptomsPage());
-            DisplayAlert("Got it!", "Thank you for letting us know. This information will stay confidential.", "OK");
+            if (0 == Interlocked.Exchange(ref ButtonLock, 1)) {
+                await Navigation.PushPopupAsync(GetSymptomsPage());
+                ButtonLock = 0;
+            }
         }
 
-        void ClickedRisk(System.Object sender, System.EventArgs e)
+        async void ClickedRisk(System.Object sender, System.EventArgs e)
         {
-            DisplayAlert("Your risk level", "According to our calculations your risk is X. [plus additional recommandations]", "OK");
+            if (0 == Interlocked.Exchange(ref ButtonLock, 1)) {
+                await DisplayAlert("Your risk level", "According to our calculations your risk is X. [plus additional recommandations]", "OK");
+                ButtonLock = 0;
+            }
         }
     }
 }

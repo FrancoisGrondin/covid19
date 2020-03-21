@@ -27,11 +27,11 @@ namespace CovidTracker
 
         private static async Task<string> GetId()
         {
-            string id = Preferences.Get("COVID_TRACKER_ID", "null");
+            string id = Preferences.Get(AppConfiguration.PREF_ID, "null");
             if (id.Equals("null")) {
                 id = await NetworkLayer.RegisterAndGetId();
                 // Get ID from network
-                Preferences.Set("COVID_TRACKER_ID", id);
+                Preferences.Set(AppConfiguration.PREF_ID, id);
             }
             return id;
         }

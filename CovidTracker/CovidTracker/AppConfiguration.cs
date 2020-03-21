@@ -50,19 +50,12 @@ namespace CovidTracker
 
         public static readonly string REGISTER_ID_JSON = "{\"action\": \"register\"}";
 
+
         /* ---------------------------------------------------------------------------------- 
-         * SYMPTOMS LIST
+         * PREFERENCE NAMES
          */
-        public static readonly string[][] SYMPTOMS = {
-            new string[] { "symptom_01", "Fever" },
-            new string[] { "symptom_02", "Tiredeness" },
-            new string[] { "symptom_03", "Dry Cough" },
-            new string[] { "symptom_04", "Aches and pains" },
-            new string[] { "symptom_05", "Nasal congestion" },
-            new string[] { "symptom_06", "Runny nose" },
-            new string[] { "symptom_07", "sore throat" },
-            new string[] { "symptom_08", "diarrhea" }
-        };
+
+        public static readonly string PREF_ID = "COVID_TRACKER_ID";
 
 
         /* ---------------------------------------------------------------------------------- 

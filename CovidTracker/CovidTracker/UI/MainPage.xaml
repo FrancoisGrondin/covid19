@@ -75,7 +75,7 @@
                 Grid.Column="0"
                 Padding="20"
                 CornerRadius="10"
-                TextColor="White"
+                TextColor="{Binding Source={x:Static l:AppConfiguration.BG_WHITE}}"
                 FontSize="Large"
                 Text="Am I at Risk?"
                 BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_PRIMARY}}"

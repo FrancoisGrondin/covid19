@@ -59,7 +59,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 		# Register new user
 		if action == 'register':
 
-			newid = str(int(time.time() * 10000000) * 10000 + random.randrange(10000))[::-1]
+			newid = str(int(time.time() * 10000000) * 10000000 + random.randrange(10000000))[::-1]
 
 			reply = { 'id': newid }
 

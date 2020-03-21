@@ -1,7 +1,6 @@
 TODO APP
 ========
 
-    - Bouton 'symptoms' : formulaire et envoie au serveur
     - Bouton 'action' : réception des infos du serveur et les afficher
     - Localize app
     - Icône d'application

@@ -23,8 +23,13 @@ namespace CovidTracker
          * SERVERS CONFIGURATION
          */
 
-        public static readonly UriBuilder REGISTRATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 3000);
+        public static readonly UriBuilder REGISTRATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 8000);
         public static readonly UriBuilder LOCATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 8000);
+
+
+        /* ---------------------------------------------------------------------------------- 
+         * LOCATIONS SAMPLING
+         */
 
         // MINIMUM_TIME_MS milliseconds must have elapsed for the 
         // device to trigger a location change (Android only)
@@ -37,6 +42,14 @@ namespace CovidTracker
 
         // Number of location changes to record before sending the bundle to the server
         public static readonly int LOCATIONS_BUFFER = 3;
+
+
+        /* ---------------------------------------------------------------------------------- 
+         * NETWORK COMMUNICATION
+         */
+
+        public static readonly string REGISTER_ID_JSON = "{\"action\": \"register\"}";
+
 
 
         /* ---------------------------------------------------------------------------------- 

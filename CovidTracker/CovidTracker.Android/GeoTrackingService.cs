@@ -26,6 +26,9 @@ namespace CovidTracker.Droid
         Handler handler;
         Action runnable;
 
+        private LocationsAggregator LocationsAggregator;
+
+
         public override void OnCreate()
         {
             base.OnCreate();
@@ -41,6 +44,7 @@ namespace CovidTracker.Droid
 
             StartLocationUpdates();
         }
+
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
@@ -83,18 +87,23 @@ namespace CovidTracker.Droid
             StartForeground(SERVICE_RUNNING_NOTIFICATION_ID, notification);
         }
 
-        public void StartLocationUpdates()
+
+        public async void StartLocationUpdates()
         {
+            LocationsAggregator = await LocationsAggregator.GetInstance();
+
             LocationManager locationManager = (LocationManager)this.GetSystemService(Context.LocationService);
             locationManager.RequestLocationUpdates(LocationManager.GpsProvider,
                                                    AppConfiguration.MINIMUM_TIME_MS, AppConfiguration.MINIMUM_DISTANCE_M, this);
         }
 
-        public void OnLocationChanged(Location location)
+
+        public async void OnLocationChanged(Location location)
         {
-            DeviceLocation.SendLocationInformationToServer(location.Longitude, location.Latitude,
-                                                           location.Bearing, location.Speed, location.Accuracy);
+            await LocationsAggregator.RecordLocation(location.Longitude, location.Latitude,
+                                                     location.Bearing, location.Speed, location.Accuracy);
         }
+
 
         public void OnProviderDisabled(string provider)
         {

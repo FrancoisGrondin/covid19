@@ -8,6 +8,8 @@ namespace CovidTracker.iOS
     public class GeoTrackingService
     {
         protected CLLocationManager LocationManager;
+        private LocationsAggregator LocationsAggregator;
+
 
         public GeoTrackingService()
         {
@@ -27,7 +29,8 @@ namespace CovidTracker.iOS
 
         }
 
-        public void StartLocationUpdates()
+
+        public async void StartLocationUpdates()
         {
             // We need the user's permission for our app to use the GPS in iOS. This is done either by the user accepting
             // the popover when the app is first launched, or by changing the permissions for the app in Settings
@@ -36,10 +39,12 @@ namespace CovidTracker.iOS
                 LocationManager.DesiredAccuracy = CLLocation.AccuracyBest;
                 LocationManager.DistanceFilter = AppConfiguration.MINIMUM_DISTANCE_M;
 
-                LocationManager.LocationsUpdated += (object sender, CLLocationsUpdatedEventArgs e) => {
+                LocationsAggregator = await LocationsAggregator.GetInstance();
+
+                LocationManager.LocationsUpdated += async (object sender, CLLocationsUpdatedEventArgs e) => {
                     foreach (CLLocation location in e.Locations) {
-                        DeviceLocation.SendLocationInformationToServer(location.Coordinate.Longitude, location.Coordinate.Latitude,
-                                                                       location.Course, location.Speed, location.HorizontalAccuracy);
+                        await LocationsAggregator.RecordLocation(location.Coordinate.Longitude, location.Coordinate.Latitude,
+                                                                 location.Course, location.Speed, location.HorizontalAccuracy);
                     }
                 };
 

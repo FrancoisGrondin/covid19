@@ -35,6 +35,9 @@ namespace CovidTracker
         // a location change (Android, iOS)
         public static readonly int MINIMUM_DISTANCE_M = 2;
 
+        // Number of location changes to record before sending the bundle to the server
+        public static readonly int LOCATIONS_BUFFER = 3;
+
 
         /* ---------------------------------------------------------------------------------- 
          * DO NOT CHANGE THE LINES BELOW

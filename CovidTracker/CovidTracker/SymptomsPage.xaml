@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:l="clr-namespace:CovidTracker"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    x:Class="CovidTracker.SymptomsPage"
+    BackgroundColor="#aa000000"
+>
+
+    <Frame
+        Margin="20"
+        Padding="0"
+        CornerRadius="15"
+        HasShadow="False"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        IsClippedToBounds="True"
+        BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_LIGHT}}"
+        BorderColor="{Binding Source={x:Static l:AppConfiguration.BG_INFO}}"
+    >
+        <StackLayout
+            Padding="0"
+            Margin="0"
+        >
+
+            <Label
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="StartAndExpand"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                FontAttributes="Bold"
+                FontSize="Title"
+                TextColor="{Binding Source={x:Static l:AppConfiguration.BG_WHITE}}"
+                Text="Your Symptoms"
+                Padding="10"
+                BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_INFO}}"
+            />
+
+            <ScrollView
+                HorizontalOptions="CenterAndExpand"
+                >
+                <StackLayout
+                        Spacing="0"
+                        Padding="0"
+                        Margin="0"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        BindableLayout.ItemsSource="{Binding SymptomsList}"
+                    >
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout
+                                    Orientation="Horizontal"
+                                    HorizontalOptions="FillAndExpand"
+                                    Margin="0, 0, 0, 10"
+                                    Padding="0"
+                                    Spacing="0"
+                                >
+                                <CheckBox
+                                    IsChecked="{Binding Checked}"
+                                    CheckedChanged="CheckedChanged"
+                                />
+                                <Label
+                                    Margin="10, 0, 10, 0"
+                                    VerticalTextAlignment="Center"
+                                    FontSize="Large"
+                                    Text="{Binding Description}"
+                                    TextColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
+                                />
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+
+            <Button
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="EndAndExpand"
+                Margin="0, 0, 0, 20"
+                Padding="40, 20, 40, 20"
+                CornerRadius="10"
+                TextColor="White"
+                FontSize="Large"
+                Text="Report"
+                BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_PRIMARY}}"
+            />
+
+        </StackLayout>
+    </Frame>
+</pages:PopupPage>

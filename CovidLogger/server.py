@@ -121,5 +121,5 @@ if args.root == "":
     raise Exception("Invalid root directory")		
 
 root = args.root
-server = ThreadingHTTPServer((args.host, 8000), RequestHandler)
+server = ThreadingHTTPServer((args.address, 8000), RequestHandler)
 server.serve_forever()

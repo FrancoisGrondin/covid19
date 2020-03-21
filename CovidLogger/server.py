@@ -115,10 +115,11 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-r", "--root", help="root directory for saving data", type=str, default="")
+parser.add_argument("-h", "--host", help="server ip address", type=str, default="localhost")
 args = parser.parse_args()
 if args.root == "":
     raise Exception("Invalid root directory")		
 
 root = args.root
-server = ThreadingHTTPServer(('192.168.0.104', 8000), RequestHandler)
+server = ThreadingHTTPServer((args.host, 8000), RequestHandler)
 server.serve_forever()

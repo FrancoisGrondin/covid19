@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
 
 namespace CovidTracker
@@ -13,6 +14,17 @@ namespace CovidTracker
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        private SymptomsPage SymptomsPage;
+
+        private SymptomsPage GetSymptomsPage()
+        {
+            if (SymptomsPage == null) {
+                SymptomsPage = new SymptomsPage();
+            }
+
+            return SymptomsPage;
+        }
+
         public MainPage()
         {
             InitializeComponent();
@@ -20,6 +32,7 @@ namespace CovidTracker
 
         void ClickedSymptoms(System.Object sender, System.EventArgs e)
         {
+            Navigation.PushPopupAsync(GetSymptomsPage());
             DisplayAlert("Got it!", "Thank you for letting us know. This information will stay confidential.", "OK");
         }
 

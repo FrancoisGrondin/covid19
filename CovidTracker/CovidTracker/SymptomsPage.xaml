@@ -39,6 +39,7 @@
 
             <ScrollView
                 HorizontalOptions="CenterAndExpand"
+                Margin="20"
                 >
                 <StackLayout
                         Spacing="0"
@@ -53,21 +54,26 @@
                             <StackLayout
                                     Orientation="Horizontal"
                                     HorizontalOptions="FillAndExpand"
-                                    Margin="0, 0, 0, 10"
+                                    Margin="0"
                                     Padding="0"
                                     Spacing="0"
                                 >
                                 <CheckBox
-                                    IsChecked="{Binding Checked}"
-                                    CheckedChanged="CheckedChanged"
+                                    Margin="0"
+                                    IsChecked="{Binding IsChecked}"
                                 />
                                 <Label
-                                    Margin="10, 0, 10, 0"
+                                    Margin="0"
+                                    Padding="10, 5, 0, 5"
                                     VerticalTextAlignment="Center"
                                     FontSize="Large"
                                     Text="{Binding Description}"
                                     TextColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
-                                />
+                                >
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapCommand}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </StackLayout>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>

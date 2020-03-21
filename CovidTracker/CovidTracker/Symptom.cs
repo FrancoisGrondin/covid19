@@ -1,11 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CovidTracker
 {
-    public class Symptom
+    public class Symptom : INotifyPropertyChanged
     {
         private string ID;
         public string Description { get; set; }
@@ -18,8 +19,11 @@ namespace CovidTracker
             set {
                 _isChecked = value;
                 Preferences.Set(ID, _isChecked);
+                OnPropertyChanged("IsChecked");
+
             }
         }
+
 
         public Symptom(string ID, string Description)
         {
@@ -28,12 +32,25 @@ namespace CovidTracker
             this._isChecked = Preferences.Get(ID, false);
         }
 
-        public ICommand CheckChangedCommand => new Command(CheckChanged);
 
-        void CheckChanged()
+        public ICommand TapCommand => new Command(Tapped);
+
+        void Tapped()
         {
             IsChecked = !IsChecked;
         }
+
+
+        #region INotifyChangedProperties
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null) {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion INotifyChangedProperties
 
     }
 }

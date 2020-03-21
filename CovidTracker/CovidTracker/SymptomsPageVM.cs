@@ -16,10 +16,5 @@ namespace CovidTracker
             }
         }
 
-        public void CheckedChanged(System.Object sender, Xamarin.Forms.CheckedChangedEventArgs e)
-        {
-            object x = sender;
-        }
-
     }
 }

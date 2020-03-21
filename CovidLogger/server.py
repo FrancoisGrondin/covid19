@@ -26,11 +26,6 @@ class RequestHandler(BaseHTTPRequestHandler):
 			# Generate the CSV file path
 			csv = root + user[0] + '/' + user[1] + '/' + user[2] + '/' + user + '.csv'
 
-			# If directory does not exist, create it
-			folder = os.path.dirname(csv)
-			if not os.path.exists(folder):
-				os.makedirs(folder)
-
 			# Empty string that will hold all fields to write to file
 			expr = ''
 
@@ -63,24 +58,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 			reply = { 'id': newid }
 
-			data = json.dumps(reply).encode()
-
-			# Generate the CSV file path
-			csv = root + "ids.csv"
-
-			# Empty string that will hold all fields to write to file
-			expr = ''
-
-			# If file does not exist, then first add the headers
-			if not os.path.exists(csv):
-				expr += 'id\n'
-
-			# Add id
-			expr += ('%s\n' % newid)
-
-			# Dump in the file
-			with open(csv,'a') as fd:
-				fd.write(expr)			
+			data = json.dumps(reply).encode()	
 
 			self.send_response(200)
 			self.end_headers()
@@ -96,13 +74,8 @@ class RequestHandler(BaseHTTPRequestHandler):
 			# Generate the CSV file path
 			csv = root + user[0] + '/' + user[1] + '/' + user[2] + '/' + user + '.json'
 
-			# If directory does not exist, create it
-			folder = os.path.dirname(csv)
-			if not os.path.exists(folder):
-				os.makedirs(folder)
-
 			# Create JSON expression
-			expr = json.dumps(data['deviceLocations']) + '\n'
+			expr = json.dumps(data['symptoms']) + '\n'
 
 			# Dump in the file
 			with open(csv, 'a') as fd:
@@ -121,5 +94,15 @@ if args.root == "":
     raise Exception("Invalid root directory")		
 
 root = args.root
+
+# Create the directory tree at startup
+prefixes = range(0,10)
+for prefix1 in prefixes:
+	for prefix2 in prefixes:
+		for prefix3 in prefixes:
+			folder = root + str(prefix1) + '/' + str(prefix2) + '/' + str(prefix3) + '/'
+			if not os.path.exists(folder):
+				os.makedirs(folder)
+
 server = ThreadingHTTPServer((args.address, 8000), RequestHandler)
 server.serve_forever()

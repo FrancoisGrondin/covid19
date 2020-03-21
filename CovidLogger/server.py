@@ -14,86 +14,90 @@ class RequestHandler(BaseHTTPRequestHandler):
 		post_body = self.rfile.read(content_len)
 		data = json.loads(post_body)
 
-		# Get action
-		action = data['action']
+		if content_len <= length:
 
-		# Log GPS
-		if action == 'track':
+			# Get action
+			action = data['action']
 
-			# Get user id
-			user = data['id']
+			# Log GPS
+			if action == 'track':
 
-			# Generate the CSV file path
-			csv = root + user[0] + '/' + user[1] + '/' + user[2] + '/' + user + '.csv'
+				# Get user id
+				user = data['id']
 
-			# Empty string that will hold all fields to write to file
-			expr = ''
+				# Generate the CSV file path
+				csv = root + user[0] + '/' + user[1] + '/' + user[2] + '/' + user + '.csv'
 
-			# If file does not exist, then first add the headers
-			if not os.path.exists(csv):
-				expr += 'timestamp,latitude,longitude,accuracy,speed,course\n'
+				# Empty string that will hold all fields to write to file
+				expr = ''
 
-			# Now loop in each element and extract content
-			for element in data['deviceLocations']:
+				# If file does not exist, then first add the headers
+				if not os.path.exists(csv):
+					expr += 'timestamp,latitude,longitude,accuracy,speed,course\n'
 
-				tup = (	element['timestamp'], 
-						element['latitude'], 
-						element['longitude'], 
-						element['accuracy'], 
-						element['speed'], 
-						element['course'])
-				expr += '%u,%d,%d,%d,%d,%d\n' % tup
+				# Now loop in each element and extract content
+				for element in data['deviceLocations']:
 
-			# Finally, do a single dump in the file
-			with open(csv,'a') as fd:
-				fd.write(expr)
+					tup = (	element['timestamp'], 
+							element['latitude'], 
+							element['longitude'], 
+							element['accuracy'], 
+							element['speed'], 
+							element['course'])
+					expr += '%u,%d,%d,%d,%d,%d\n' % tup
 
-			self.send_response(200)
-			self.end_headers()	
+				# Finally, do a single dump in the file
+				with open(csv,'a') as fd:
+					fd.write(expr)
 
-		# Register new user
-		if action == 'register':
+				self.send_response(200)
+				self.end_headers()	
 
-			newid = str(int(time.time() * 10000000) * 10000000 + random.randrange(10000000))[::-1]
+			# Register new user
+			if action == 'register':
 
-			reply = { 'id': newid }
+				newid = str(int(time.time() * 10000000) * 10000000 + random.randrange(10000000))[::-1]
 
-			data = json.dumps(reply).encode()	
+				reply = { 'id': newid }
 
-			self.send_response(200)
-			self.end_headers()
+				data = json.dumps(reply).encode()	
 
-			self.wfile.write(data)
+				self.send_response(200)
+				self.end_headers()
 
-		# Update user health
-		if action == 'report':
+				self.wfile.write(data)
 
-			# Get user id
-			user = data['id']
+			# Update user health
+			if action == 'report':
 
-			# Generate the CSV file path
-			csv = root + user[0] + '/' + user[1] + '/' + user[2] + '/' + user + '.json'
+				# Get user id
+				user = data['id']
 
-			# Create JSON expression
-			expr = json.dumps(data['symptoms']) + '\n'
+				# Generate the CSV file path
+				csv = root + user[0] + '/' + user[1] + '/' + user[2] + '/' + user + '.json'
 
-			# Dump in the file
-			with open(csv, 'a') as fd:
-				fd.write(expr)
+				# Create JSON expression
+				expr = json.dumps(data['symptoms']) + '\n'
 
-			self.send_response(200)
-			self.end_headers()
+				# Dump in the file
+				with open(csv, 'a') as fd:
+					fd.write(expr)
+
+				self.send_response(200)
+				self.end_headers()
 
 		return
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-r", "--root", help="root directory for saving data", type=str, default="")
 parser.add_argument("-a", "--address", help="server ip address", type=str, default="localhost")
+parser.add_argument("-l", "--length", help="maximum length of each message in bytes", type=int, default=4096)
 args = parser.parse_args()
 if args.root == "":
     raise Exception("Invalid root directory")		
 
 root = args.root
+length = args.length
 
 # Create the directory tree at startup
 prefixes = range(0,10)

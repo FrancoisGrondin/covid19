@@ -14,7 +14,7 @@
         CornerRadius="15"
         HasShadow="False"
         HorizontalOptions="FillAndExpand"
-        VerticalOptions="FillAndExpand"
+        VerticalOptions="CenterAndExpand"
         IsClippedToBounds="True"
         BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
         BorderColor="{Binding Source={x:Static l:AppConfiguration.BG_INFO}}"
@@ -22,11 +22,12 @@
         <StackLayout
             Padding="0"
             Margin="0"
+            Spacing="0"
         >
 
             <Label
                 HorizontalOptions="FillAndExpand"
-                VerticalOptions="StartAndExpand"
+                VerticalOptions="Start"
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center"
                 FontAttributes="Bold"
@@ -43,7 +44,7 @@
                 CornerRadius="15"
                 HasShadow="False"
                 HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand"
+                VerticalOptions="Start"
                 IsClippedToBounds="True"
                 BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_LIGHT}}"
             >
@@ -59,24 +60,25 @@
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <StackLayout
-                                        Orientation="Horizontal"
-                                        HorizontalOptions="FillAndExpand"
-                                        Margin="0"
-                                        Padding="0"
-                                        Spacing="0"
-                                    >
+                                Orientation="Horizontal"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                Margin="0"
+                                Padding="0"
+                                Spacing="0"
+                            >
                                 <CheckBox
-                                        Margin="0"
-                                        IsChecked="{Binding IsChecked}"
-                                    />
+                                    Margin="0"
+                                    IsChecked="{Binding IsChecked}"
+                                />
                                 <Label
-                                        Margin="0"
-                                        Padding="10, 5, 0, 5"
-                                        VerticalTextAlignment="Center"
-                                        FontSize="Large"
-                                        Text="{Binding Description}"
-                                        TextColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
-                                    >
+                                    Margin="0"
+                                    Padding="10, 5, 0, 5"
+                                    VerticalTextAlignment="Center"
+                                    FontSize="Large"
+                                    Text="{Binding Description}"
+                                    TextColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
+                                >
                                     <Label.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding TapCommand}" />
                                     </Label.GestureRecognizers>
@@ -101,6 +103,7 @@
 
                 <ScrollView
                     HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
                     Margin="10"
                     Padding="0"
                 >
@@ -146,7 +149,7 @@
 
             <Grid
                 HorizontalOptions="CenterAndExpand"
-                VerticalOptions="EndAndExpand"
+                VerticalOptions="End"
                 ColumnSpacing="20"
                 Margin="0, 0, 0, 20"
                 Padding="20, 0, 20, 0"

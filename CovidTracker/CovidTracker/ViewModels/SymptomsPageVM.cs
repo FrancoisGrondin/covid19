@@ -25,7 +25,6 @@ namespace CovidTracker
                     TestsList.Add(symptom);
                 }
             }
-
             foreach (FieldInfo field in typeof(Symptoms).GetFields()) {
                 if (!field.Name.Equals("tested_positive")) {
                     Symptom symptom = new Symptom(field.Name);

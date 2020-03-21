@@ -9,9 +9,12 @@
     x:Class="CovidTracker.MainPage"
     BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
 >
-    <StackLayout>
+    <StackLayout
+        Spacing="0"
+    >
 
         <Label
+            Margin="0"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="Start"
             HorizontalTextAlignment="Center"

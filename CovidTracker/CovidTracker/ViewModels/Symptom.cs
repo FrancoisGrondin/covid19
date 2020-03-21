@@ -25,10 +25,10 @@ namespace CovidTracker
         }
 
 
-        public Symptom(string Id, string Description)
+        public Symptom(string aId)
         {
-            this.Id = Id;
-            this.Description = Description;
+            this.Id = aId;
+            Description = Id.Substring(0, 1).ToUpper() + Id.Substring(1).Replace("_", " ");
             this._isChecked = Preferences.Get(Id, false);
         }
 

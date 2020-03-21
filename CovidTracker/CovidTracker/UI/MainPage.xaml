@@ -13,7 +13,7 @@
 
         <Label
             HorizontalOptions="FillAndExpand"
-            VerticalOptions="StartAndExpand"
+            VerticalOptions="Start"
             HorizontalTextAlignment="Center"
             VerticalTextAlignment="Center"
             FontAttributes="Bold"
@@ -25,11 +25,11 @@
         />
 
         <Frame
-            Margin="20, 0, 20, 0"
+            Margin="20"
             CornerRadius="15"
             HasShadow="False"
             HorizontalOptions="CenterAndExpand"
-            VerticalOptions="CenterAndExpand"
+            VerticalOptions="FillAndExpand"
             BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_LIGHT}}"
         >
             <Label
@@ -45,7 +45,7 @@
 
         <Grid
             HorizontalOptions="CenterAndExpand"
-            VerticalOptions="EndAndExpand"
+            VerticalOptions="End"
             RowSpacing="20"
             Margin="0, 0, 0, 20"
         >
@@ -61,11 +61,11 @@
             <Button
                 Grid.Row="0"
                 Grid.Column="0"
-                Padding="20"
+                Padding="20, 10, 20, 10"
                 CornerRadius="10"
                 TextColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
                 FontSize="Large"
-                Text="I have Symptoms"
+                Text="Health Report"
                 BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_WARNING}}"
                 Clicked="ClickedSymptoms"
             />
@@ -73,7 +73,7 @@
             <Button
                 Grid.Row="1"
                 Grid.Column="0"
-                Padding="20"
+                Padding="20, 10, 20, 10"
                 CornerRadius="10"
                 TextColor="{Binding Source={x:Static l:AppConfiguration.BG_WHITE}}"
                 FontSize="Large"

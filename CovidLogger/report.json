@@ -1,9 +1,17 @@
 {
 	"action": "report",
 	"id": "985360127776034279574851",
+    "timestamp": 1584722908,
 	"symptoms":
 	{
-		"timestamp": 1584722908,
-		"contamination": 7
+        "tested_positive" : true
+        "fever" : false
+        "tiredeness" : true
+        "dry_cough" : true
+        "aches_and_pains" : false
+        "nasal_congestion" : true
+        "runny_nose" : true
+        "sore_throat" : true
+        "diarrhea" : true
 	}
 }

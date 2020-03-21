@@ -39,7 +39,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 				expr += 'timestamp,latitude,longitude,accuracy,speed,course\n'
 
 			# Now loop in each element and extract content
-			for element in data['data']:
+			for element in data['deviceLocations']:
 
 				tup = (	element['timestamp'], 
 						element['latitude'], 
@@ -102,7 +102,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 				os.makedirs(folder)
 
 			# Create JSON expression
-			expr = json.dumps(data['data']) + '\n'
+			expr = json.dumps(data['deviceLocations']) + '\n'
 
 			# Dump in the file
 			with open(csv, 'a') as fd:
@@ -120,5 +120,5 @@ if args.root == "":
     raise Exception("Invalid root directory")		
 
 root = args.root
-server = ThreadingHTTPServer(('localhost', 8000), RequestHandler)
+server = ThreadingHTTPServer(('192.168.0.104', 8000), RequestHandler)
 server.serve_forever()

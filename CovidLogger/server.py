@@ -34,18 +34,27 @@ class RequestHandler(BaseHTTPRequestHandler):
 					  data_in['id'][0] + '/' + \
 					  data_in['id'][1] + '/' + \
 					  data_in['id'][2] + '/' + \
-					  data_in['id'] + '.csv'
+					  data_in['id'] + '.trk'
 
 				expr = ''
 
 				if not os.path.exists(csv):
-					expr += 'timestamp,latitude,longitude,accuracy,speed,course\n'				
+					expr += 'timestamp,'
+					expr += 'latitude,'
+					expr += 'longitude,'
+					expr += 'accuracy,'
+					expr += 'speed,'
+					expr += 'course\n'				
 
 				for element in data_in['deviceLocations']:
 
-					tup = (	element['timestamp'], element['latitude'], 
-							element['longitude'], element['accuracy'], 
-							element['speed'], element['course'] )
+					tup = (	element['timestamp'], 
+							element['latitude'], 
+							element['longitude'], 
+							element['accuracy'], 
+							element['speed'], 
+							element['course'] )
+
 					expr += '%u,%.4f,%.4f,%.4f,%.1f,%.1f\n' % tup
 
 				with open(csv,'a') as fd:
@@ -65,7 +74,48 @@ class RequestHandler(BaseHTTPRequestHandler):
 				self.send_response(200)
 				self.end_headers()
 
-				self.wfile.write(data_out)				
+				self.wfile.write(data_out)
+
+			if data_in['action'] == 'report':
+
+				csv = self.server.directory + \
+					  data_in['id'][0] + '/' + \
+					  data_in['id'][1] + '/' + \
+					  data_in['id'][2] + '/' + \
+					  data_in['id'] + '.rpt'						
+
+				expr = ''
+
+				if not os.path.exists(csv):
+					expr += 'timestamp,'
+					expr += 'tested_positive,'
+					expr += 'fever,'
+					expr += 'tiredeness,'
+					expr += 'dry_cough,'
+					expr += 'aches_and_pains,'
+					expr += 'nasal_congestion,'
+					expr += 'runny_nose,'
+					expr += 'sore_throat,'
+					expr += 'diarrhea\n'
+
+				tup = (	data_in['timestamp'], 
+						data_in['symptoms']['tested_positive'], 
+						data_in['symptoms']['fever'], 
+						data_in['symptoms']['tiredeness'], 
+						data_in['symptoms']['dry_cough'], 
+						data_in['symptoms']['aches_and_pains'],
+						data_in['symptoms']['nasal_congestion'],
+						data_in['symptoms']['runny_nose'],
+						data_in['symptoms']['sore_throat'],
+						data_in['symptoms']['diarrhea'] )
+
+				expr += '%u,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' % tup				
+
+				with open(csv,'a') as fd:
+					fd.write(expr)
+
+				self.send_response(200)
+				self.end_headers()
 
 class Server(ThreadingHTTPServer):
 
@@ -73,13 +123,11 @@ class Server(ThreadingHTTPServer):
 
 		super(Server, self).__init__((address, port), RequestHandler)
 
-		# Save fields for ulterior access by the request handler
 		self.directory = directory
 		self.length = length
 		self.timeout = timeout
 		self.requests = requests
 
-		# Create the directory tree at startup
 		prefixes = range(0,10)
 		for prefix1 in prefixes:
 			for prefix2 in prefixes:
@@ -100,7 +148,6 @@ class Server(ThreadingHTTPServer):
 
 		while True:
 
-			print('Clear')
 			self.lock.acquire()
 			self.ips.clear()
 			self.lock.release()

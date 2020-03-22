@@ -4,14 +4,14 @@
     "timestamp": 1584722908,
 	"symptoms":
 	{
-        "tested_positive" : true
-        "fever" : false
-        "tiredeness" : true
-        "dry_cough" : true
-        "aches_and_pains" : false
-        "nasal_congestion" : true
-        "runny_nose" : true
-        "sore_throat" : true
+        "tested_positive" : true,
+        "fever" : false,
+        "tiredeness" : true,
+        "dry_cough" : true,
+        "aches_and_pains" : false,
+        "nasal_congestion" : true,
+        "runny_nose" : true,
+        "sore_throat" : true,
         "diarrhea" : true
 	}
 }

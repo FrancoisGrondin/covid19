@@ -1,9 +1,11 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer, ThreadingHTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlparse
+
+import argparse
 import json
 import os
-import argparse
 import random
+import threading
 import time
 
 class RequestHandler(BaseHTTPRequestHandler):
@@ -12,101 +14,113 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 		content_len = int(self.headers.get('content-length'))
 		post_body = self.rfile.read(content_len)
-		data = json.loads(post_body)
+		data_in = json.loads(post_body)
 
-		if content_len <= length:
+		ip = self.client_address[0]
 
-			# Get action
-			action = data['action']
+		self.server.lock.acquire()
+		if ip not in server.ips:
+			self.server.ips[ip] = 1
+		else:
+			self.server.ips[ip] += 1
+		count = self.server.ips[ip]
+		self.server.lock.release()
 
-			# Log GPS
-			if action == 'track':
+		if content_len <= self.server.length and count <= self.server.requests:
 
-				# Get user id
-				user = data['id']
+			if data_in['action'] == 'track':
 
-				# Generate the CSV file path
-				csv = root + user[0] + '/' + user[1] + '/' + user[2] + '/' + user + '.csv'
+				csv = self.server.directory + \
+					  data_in['id'][0] + '/' + \
+					  data_in['id'][1] + '/' + \
+					  data_in['id'][2] + '/' + \
+					  data_in['id'] + '.csv'
 
-				# Empty string that will hold all fields to write to file
 				expr = ''
 
-				# If file does not exist, then first add the headers
 				if not os.path.exists(csv):
-					expr += 'timestamp,latitude,longitude,accuracy,speed,course\n'
+					expr += 'timestamp,latitude,longitude,accuracy,speed,course\n'				
 
-				# Now loop in each element and extract content
-				for element in data['deviceLocations']:
+				for element in data_in['deviceLocations']:
 
-					tup = (	element['timestamp'], 
-							element['latitude'], 
-							element['longitude'], 
-							element['accuracy'], 
-							element['speed'], 
-							element['course'])
-					expr += '%u,%d,%d,%d,%d,%d\n' % tup
+					tup = (	element['timestamp'], element['latitude'], 
+							element['longitude'], element['accuracy'], 
+							element['speed'], element['course'] )
+					expr += '%u,%.4f,%.4f,%.4f,%.1f,%.1f\n' % tup
 
-				# Finally, do a single dump in the file
 				with open(csv,'a') as fd:
 					fd.write(expr)
 
 				self.send_response(200)
-				self.end_headers()	
+				self.end_headers()
 
-			# Register new user
-			if action == 'register':
+			if data_in['action'] == 'register':
 
-				newid = str(int(time.time() * 10000000) * 10000000 + random.randrange(10000000))[::-1]
+				rnd = 10000000
+				newid = str(int(time.time() * rnd) * rnd + random.randrange(rnd))[::-1]
 
 				reply = { 'id': newid }
-
-				data = json.dumps(reply).encode()	
-
-				self.send_response(200)
-				self.end_headers()
-
-				self.wfile.write(data)
-
-			# Update user health
-			if action == 'report':
-
-				# Get user id
-				user = data['id']
-
-				# Generate the CSV file path
-				csv = root + user[0] + '/' + user[1] + '/' + user[2] + '/' + user + '.json'
-
-				# Create JSON expression
-				expr = json.dumps(data['symptoms']) + '\n'
-
-				# Dump in the file
-				with open(csv, 'a') as fd:
-					fd.write(expr)
+				data_out = json.dumps(reply).encode()	
 
 				self.send_response(200)
 				self.end_headers()
 
-		return
+				self.wfile.write(data_out)				
+
+class Server(ThreadingHTTPServer):
+
+	def __init__(self, address, port, directory, length, timeout, requests):
+
+		super(Server, self).__init__((address, port), RequestHandler)
+
+		# Save fields for ulterior access by the request handler
+		self.directory = directory
+		self.length = length
+		self.timeout = timeout
+		self.requests = requests
+
+		# Create the directory tree at startup
+		prefixes = range(0,10)
+		for prefix1 in prefixes:
+			for prefix2 in prefixes:
+				for prefix3 in prefixes:
+					folder = self.directory + str(prefix1) + '/' + str(prefix2) + '/' + str(prefix3) + '/'
+					if not os.path.exists(folder):
+						os.makedirs(folder)
+
+		self.lock = threading.Lock()
+		self.ips = {}
+
+	def run_ips(self):
+
+		thread = threading.Thread(target=self.clear)
+		thread.start()		
+
+	def clear(self):
+
+		while True:
+
+			print('Clear')
+			self.lock.acquire()
+			self.ips.clear()
+			self.lock.release()
+			time.sleep(self.timeout)
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-r", "--root", help="root directory for saving data", type=str, default="")
-parser.add_argument("-a", "--address", help="server ip address", type=str, default="localhost")
-parser.add_argument("-l", "--length", help="maximum length of each message in bytes", type=int, default=4096)
+parser.add_argument("-a", "--address", help="ip address", type=str, default="localhost")
+parser.add_argument("-d", "--directory", help="root directory", type=str, default="")
+parser.add_argument("-l", "--length", help="message length (bytes)", type=int, default=4096)
+parser.add_argument("-r", "--requests", help="requests per ip", type=int, default=10)
+parser.add_argument("-p", "--port", help="port address", type=int, default=8000)
+parser.add_argument("-t", "--timeout", help="ip list timeout (sec)", type=int, default=300)
 args = parser.parse_args()
-if args.root == "":
-    raise Exception("Invalid root directory")		
 
-root = args.root
-length = args.length
-
-# Create the directory tree at startup
-prefixes = range(0,10)
-for prefix1 in prefixes:
-	for prefix2 in prefixes:
-		for prefix3 in prefixes:
-			folder = root + str(prefix1) + '/' + str(prefix2) + '/' + str(prefix3) + '/'
-			if not os.path.exists(folder):
-				os.makedirs(folder)
-
-server = ThreadingHTTPServer((args.address, 8000), RequestHandler)
+server = Server(address=args.address, 
+				directory=args.directory, 
+				length=args.length,
+				port=args.port, 
+				requests=args.requests,
+				timeout=args.timeout)
+server.run_ips()
 server.serve_forever()
+

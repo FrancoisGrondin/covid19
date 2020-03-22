@@ -12,7 +12,6 @@ namespace CovidTracker
 
         public Report(Symptoms symptoms)
         {
-            this.id = Preferences.Get(AppConfiguration.PREF_ID, "null");
             this.timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             this.symptoms = symptoms;
         }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
@@ -35,6 +36,7 @@ namespace CovidTracker
             }
         }
 
+
         async void ClickedRisk(System.Object sender, System.EventArgs e)
         {
             if (0 == Interlocked.Exchange(ref ButtonLock, 1)) {
@@ -45,6 +47,14 @@ namespace CovidTracker
                 await DisplayAlert("Your risk level", "According to our calculations your risk is " + risk + ".", "OK");
                 ButtonLock = 0;
             }
+        }
+
+
+        void NewServerIp(System.Object sender, System.EventArgs e)
+        {
+            string newIP = IpAddress.Text != null ? IpAddress.Text : IpAddress.Placeholder;
+            AppConfiguration.REGISTRATION_SERVER_URL = new UriBuilder("http", newIP, 8000);
+            DisplayAlert("Updated", "Server IP updated to " + newIP + ".", "OK");
         }
     }
 }

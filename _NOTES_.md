@@ -1,7 +1,7 @@
 TODO APP
 ========
 
-    - Bouton 'action' : réception des infos du serveur et les afficher
+    - Connection to MS AppCenter
     - Localize app
     - Icône d'application
 

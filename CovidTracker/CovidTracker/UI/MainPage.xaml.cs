@@ -52,10 +52,9 @@ namespace CovidTracker
 
         void NewServerIp(System.Object sender, System.EventArgs e)
         {
-            if (0 == Interlocked.Exchange(ref ButtonLock, 1)) {
-                string newIP = IpAddress.Text != null ? IpAddress.Text : IpAddress.Placeholder;
-                AppConfiguration.REGISTRATION_SERVER_URL = new UriBuilder("http", newIP, 8000);
-            }
+            string newIP = IpAddress.Text != null ? IpAddress.Text : IpAddress.Placeholder;
+            AppConfiguration.REGISTRATION_SERVER_URL = new UriBuilder("http", newIP, 8000);
+            DisplayAlert("Updated", "Server IP updated to " + newIP + ".", "OK");
         }
     }
 }

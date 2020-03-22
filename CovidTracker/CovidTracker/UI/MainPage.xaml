@@ -47,6 +47,7 @@
                     HorizontalOptions="FillAndExpand"
                     Placeholder="192.168.0.104"
                     Completed="NewServerIp"
+                    BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_LIGHT}}"
                 />
                 <Button
                     HorizontalOptions="End"

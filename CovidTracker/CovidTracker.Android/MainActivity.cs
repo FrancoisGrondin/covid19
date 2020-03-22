@@ -19,8 +19,7 @@ namespace CovidTracker.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            StartGeoTrackingService();
-            LoadApplication(new App());
+            CheckPermissionsAndStart();
         }
 
         private void StartGeoTrackingService()
@@ -38,10 +37,35 @@ namespace CovidTracker.Droid
             base.OnDestroy();
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        private void CheckPermissionsAndStart()
+        {
+            string[] required = new string[] { Android.Manifest.Permission.AccessFineLocation,
+                                               Android.Manifest.Permission.AccessCoarseLocation,
+                                               Android.Manifest.Permission.AccessNetworkState };
+            bool missingPermission = false;
+            foreach (string permission in required) {
+                if (((int)Build.VERSION.SdkInt > 22) && (CheckSelfPermission(permission) != Permission.Granted)) {
+                    missingPermission = true;
+                }
+            }
+
+            if (missingPermission) {
+                RequestPermissions(required, required.Length);
+            }
+            else {
+                StartGeoTrackingService();
+                LoadApplication(new App());
+            }
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            StartGeoTrackingService();
+            LoadApplication(new App());
         }
+
     }
 }

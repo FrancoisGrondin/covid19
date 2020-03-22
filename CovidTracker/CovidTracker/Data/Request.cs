@@ -4,7 +4,7 @@ namespace CovidTracker
     public class Request
     {
         public static readonly string REGISTER = "register";
-        public static readonly string GET_RISK = "get_risk";
+        public static readonly string GET_RISK = "risk";
 
         public string id;
         public string action;

@@ -5,7 +5,7 @@ namespace CovidTracker
 {
     public class Report
     {
-        public string action = "track";
+        public string action = "report";
         public string id;
         public long timestamp;
         public Symptoms symptoms;

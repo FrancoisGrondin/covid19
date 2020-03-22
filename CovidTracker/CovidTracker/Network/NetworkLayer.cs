@@ -18,7 +18,7 @@ namespace CovidTracker
         public static async Task<string> GetRisk()
         {
             ServerResponse response = await IssueRequest(Request.GET_RISK, true);
-            return response?.risk;
+            return response?.level;
         }
 
 
@@ -30,28 +30,28 @@ namespace CovidTracker
                 request.id = await LocationsAggregator.CheckOrGetId();
             }
             string requestString = JsonConvert.SerializeObject(request);
-            Debug.WriteLine(request, "[IssueRequest]");
+            Debug.WriteLine(requestString, "[IssueRequest]");
 
             try {
                 HttpResponseMessage response = await client.PostAsync(AppConfiguration.REGISTRATION_SERVER_URL.Uri,
                                                                       new StringContent(requestString));
                 if (response.IsSuccessStatusCode) {
-                    Debug.WriteLine("Success", "[RegisterAndGetId]");
+                    Debug.WriteLine("Success", "[IssueRequest]");
                     string rawResult = await response.Content.ReadAsStringAsync();
                     try {
                         return JsonConvert.DeserializeObject<ServerResponse>(rawResult);
                     }
                     catch (JsonSerializationException e) {
-                        Debug.WriteLine("Exception: " + e.Message, "[RegisterAndGetId]");
+                        Debug.WriteLine("Exception: " + e.Message, "[IssueRequest]");
                     }
                     return new ServerResponse();
                 }
                 else {
-                    Debug.WriteLine("FAILED: " + response.ReasonPhrase, "[RegisterAndGetId]");
+                    Debug.WriteLine("FAILED: " + response.ReasonPhrase, "[IssueRequest]");
                 }
             }
             catch (Exception e) {
-                Debug.WriteLine("Exception: " + e.Message, "[RegisterAndGetId]");
+                Debug.WriteLine("Exception: " + e.Message, "[IssueRequest]");
             }
 
             return new ServerResponse();

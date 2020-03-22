@@ -117,6 +117,19 @@ class RequestHandler(BaseHTTPRequestHandler):
 				self.send_response(200)
 				self.end_headers()
 
+			if data_in['action'] == 'risk':
+
+				# Do somethin here to retrieve the risk (0-100)
+				level = 50
+
+				reply = { 'level': level }
+				data_out = json.dumps(reply).encode()	
+
+				self.send_response(200)
+				self.end_headers()
+
+				self.wfile.write(data_out)
+
 class Server(ThreadingHTTPServer):
 
 	def __init__(self, address, port, directory, length, timeout, requests):

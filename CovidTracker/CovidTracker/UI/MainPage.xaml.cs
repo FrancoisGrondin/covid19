@@ -56,6 +56,7 @@ namespace CovidTracker
         {
             string newIP = IpAddress.Text != null ? IpAddress.Text : IpAddress.Placeholder;
             AppConfiguration.REGISTRATION_SERVER_URL = new UriBuilder("http", newIP, 8000);
+            AppConfiguration.LOCATION_SERVER_URL = new UriBuilder("http", newIP, 8000);
             DisplayAlert("Updated", "Server IP updated to " + newIP + ".", "OK");
         }
     }

@@ -23,8 +23,8 @@ namespace CovidTracker
          * SERVERS CONFIGURATION
          */
 
-        public static UriBuilder REGISTRATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 8000);
-        public static UriBuilder LOCATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 8000);
+        public static UriBuilder REGISTRATION_SERVER_URL = new UriBuilder("http", "192.168.0.103", 8000);
+        public static UriBuilder LOCATION_SERVER_URL = new UriBuilder("http", "192.168.0.103", 8000);
 
 
         /* ---------------------------------------------------------------------------------- 
@@ -65,8 +65,8 @@ namespace CovidTracker
          *     XDocks/AppConfig.cs
          *     XDocks/XDocks.csproj
          */
-        public static readonly string VERSION_NAME = "1.0.1";
-        public static readonly int VERSION_CODE = 010001;
+        public static readonly string VERSION_NAME = "1.0.2";
+        public static readonly int VERSION_CODE = 010002;
 
     }
 }

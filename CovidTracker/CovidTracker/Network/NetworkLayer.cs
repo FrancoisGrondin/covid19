@@ -10,19 +10,19 @@ namespace CovidTracker
     {
         public static async Task<string> RegisterAndGetId()
         {
-            ServerResponse response = await IssueRequest(Request.REGISTER);
+            ServerResponse response = await IssueRequest(Request.REGISTER, AppConfiguration.REGISTRATION_SERVER_URL.Uri);
             return response?.id;
         }
 
 
         public static async Task<string> GetRisk()
         {
-            ServerResponse response = await IssueRequest(Request.GET_RISK, true);
+            ServerResponse response = await IssueRequest(Request.GET_RISK, AppConfiguration.LOCATION_SERVER_URL.Uri, true);
             return response?.level;
         }
 
 
-        private static async Task<ServerResponse> IssueRequest(string action, bool addId = false)
+        private static async Task<ServerResponse> IssueRequest(string action, Uri uri, bool addId = false)
         {
             HttpClient client = new HttpClient();
             Request request = new Request(action);
@@ -33,8 +33,7 @@ namespace CovidTracker
             Debug.WriteLine(requestString, "[IssueRequest]");
 
             try {
-                HttpResponseMessage response = await client.PostAsync(AppConfiguration.REGISTRATION_SERVER_URL.Uri,
-                                                                      new StringContent(requestString));
+                HttpResponseMessage response = await client.PostAsync(uri, new StringContent(requestString));
                 if (response.IsSuccessStatusCode) {
                     Debug.WriteLine("Success", "[IssueRequest]");
                     string rawResult = await response.Content.ReadAsStringAsync();

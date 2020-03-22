@@ -33,7 +33,7 @@ namespace CovidTracker
             if (reportSent) {
                 DisplayAlert("Report sent", "Thank you for letting us know. The information will stay confidential.", "OK");
             }
-            Navigation.PopPopupAsync();
+            Navigation.PopPopupAsync(false);
         }
 
 

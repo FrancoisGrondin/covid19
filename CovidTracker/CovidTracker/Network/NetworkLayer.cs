@@ -17,20 +17,24 @@ namespace CovidTracker
 
         public static async Task<string> GetRisk()
         {
-            ServerResponse response = await IssueRequest(Request.GET_RISK);
+            ServerResponse response = await IssueRequest(Request.GET_RISK, true);
             return response?.risk;
         }
 
 
-        private static async Task<ServerResponse> IssueRequest(string action)
+        private static async Task<ServerResponse> IssueRequest(string action, bool addId = false)
         {
             HttpClient client = new HttpClient();
-            string request = JsonConvert.SerializeObject(new Request(action));
+            Request request = new Request(action);
+            if (addId) {
+                request.id = await LocationsAggregator.CheckOrGetId();
+            }
+            string requestString = JsonConvert.SerializeObject(request);
             Debug.WriteLine(request, "[IssueRequest]");
 
             try {
                 HttpResponseMessage response = await client.PostAsync(AppConfiguration.REGISTRATION_SERVER_URL.Uri,
-                                                                      new StringContent(request));
+                                                                      new StringContent(requestString));
                 if (response.IsSuccessStatusCode) {
                     Debug.WriteLine("Success", "[RegisterAndGetId]");
                     string rawResult = await response.Content.ReadAsStringAsync();

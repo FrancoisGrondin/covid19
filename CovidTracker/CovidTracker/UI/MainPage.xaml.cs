@@ -23,15 +23,17 @@ namespace CovidTracker
             return SymptomsPage;
         }
 
+
         public MainPage()
         {
             InitializeComponent();
         }
 
+
         async void ClickedSymptoms(System.Object sender, System.EventArgs e)
         {
             if (0 == Interlocked.Exchange(ref ButtonLock, 1)) {
-                await Navigation.PushPopupAsync(GetSymptomsPage());
+                await Navigation.PushPopupAsync(GetSymptomsPage(), false);
                 ButtonLock = 0;
             }
         }
@@ -44,7 +46,7 @@ namespace CovidTracker
                 if (risk == null) {
                     risk = "unknown";
                 }
-                await DisplayAlert("Your risk level", "According to our calculations your risk is " + risk + ".", "OK");
+                await DisplayAlert("Your risk level", "According to our calculations your risk is level " + risk + ".", "OK");
                 ButtonLock = 0;
             }
         }

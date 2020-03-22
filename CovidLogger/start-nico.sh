@@ -1,1 +1,1 @@
-python3 server.py --root tmp --address 192.168.0.104
+python3 server.py -d tmp -a 192.168.0.104

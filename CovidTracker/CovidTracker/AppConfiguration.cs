@@ -65,8 +65,8 @@ namespace CovidTracker
          *     XDocks/AppConfig.cs
          *     XDocks/XDocks.csproj
          */
-        public static readonly string VERSION_NAME = "1.0.2";
-        public static readonly int VERSION_CODE = 010002;
+        public static readonly string VERSION_NAME = "1.0.3";
+        public static readonly int VERSION_CODE = 010003;
 
     }
 }

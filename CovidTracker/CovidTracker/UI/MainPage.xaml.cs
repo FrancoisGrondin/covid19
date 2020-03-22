@@ -38,7 +38,11 @@ namespace CovidTracker
         async void ClickedRisk(System.Object sender, System.EventArgs e)
         {
             if (0 == Interlocked.Exchange(ref ButtonLock, 1)) {
-                await DisplayAlert("Your risk level", "According to our calculations your risk is X. [plus additional recommandations]", "OK");
+                string risk = await NetworkLayer.GetRisk();
+                if (risk == null) {
+                    risk = "unknown";
+                }
+                await DisplayAlert("Your risk level", "According to our calculations your risk is " + risk + ".", "OK");
                 ButtonLock = 0;
             }
         }

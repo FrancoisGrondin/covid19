@@ -45,13 +45,6 @@ namespace CovidTracker
 
 
         /* ---------------------------------------------------------------------------------- 
-         * NETWORK COMMUNICATION
-         */
-
-        public static readonly string REGISTER_ID_JSON = "{\"action\": \"register\"}";
-
-
-        /* ---------------------------------------------------------------------------------- 
          * PREFERENCE NAMES
          */
 

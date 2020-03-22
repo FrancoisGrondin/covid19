@@ -23,8 +23,8 @@ namespace CovidTracker
          * SERVERS CONFIGURATION
          */
 
-        public static readonly UriBuilder REGISTRATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 8000);
-        public static readonly UriBuilder LOCATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 8000);
+        public static UriBuilder REGISTRATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 8000);
+        public static UriBuilder LOCATION_SERVER_URL = new UriBuilder("http", "192.168.0.104", 8000);
 
 
         /* ---------------------------------------------------------------------------------- 

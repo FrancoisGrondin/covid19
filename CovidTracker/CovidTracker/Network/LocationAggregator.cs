@@ -25,7 +25,7 @@ namespace CovidTracker
         }
 
 
-        private static async Task<string> CheckOrGetId()
+        public static async Task<string> CheckOrGetId()
         {
             string id = Preferences.Get(AppConfiguration.PREF_ID, "null");
             if (id.Equals("null")) {
@@ -46,7 +46,7 @@ namespace CovidTracker
         public async Task RecordLocation(double latitude, double longitude,
                                          double? speed, double? course, double? accuracy)
         {
-            await CheckOrGetId();
+            DeviceLocationsBundle.id = await CheckOrGetId();
             DeviceLocationsBundle.AddLocation(new DeviceLocation(latitude, longitude, speed, course, accuracy));
             if (DeviceLocationsBundle.IsFull()) {
                 string data = JsonConvert.SerializeObject(DeviceLocationsBundle);

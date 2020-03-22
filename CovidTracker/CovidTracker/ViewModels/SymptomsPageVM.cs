@@ -34,7 +34,7 @@ namespace CovidTracker
         }
 
         public ICommand ReportSymptomsCommand => new Command(ReportSymptoms);
-        void ReportSymptoms()
+        async void ReportSymptoms()
         {
             Symptoms symptoms = new Symptoms();
             foreach (Symptom symptom in TestsList) {
@@ -44,6 +44,7 @@ namespace CovidTracker
                 typeof(Symptoms).GetField(symptom.Id).SetValue(symptoms, symptom.IsChecked);
             }
             Report report = new Report(symptoms);
+            report.id = await LocationsAggregator.CheckOrGetId();
             string data = JsonConvert.SerializeObject(report);
             NetworkLayer.SendDataToServer(data);
             OnPageExit(this, true);

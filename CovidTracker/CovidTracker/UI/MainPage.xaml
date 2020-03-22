@@ -28,10 +28,46 @@
         />
 
         <Frame
+            Margin="20, 20, 20, 0"
+            Padding="10"
+            CornerRadius="15"
+            HasShadow="False"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Start"
+            BorderColor="{Binding Source={x:Static l:AppConfiguration.BG_INFO}}"
+            BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
+        >
+            <StackLayout
+                Orientation="Horizontal"
+                Spacing="10"
+                Margin="0"
+            >
+                <Entry
+                    x:Name="IpAddress"
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="192.168.0.104"
+                    Completed="NewServerIp"
+                />
+                <Button
+                    HorizontalOptions="End"
+                    Padding="20, 10, 20, 10"
+                    CornerRadius="10"
+                    TextColor="{Binding Source={x:Static l:AppConfiguration.BG_WHITE}}"
+                    FontSize="Large"
+                    Text="OK"
+                    BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_SUCCESS}}"
+                    Clicked="NewServerIp"
+                />
+
+            </StackLayout>
+        </Frame>
+
+
+        <Frame
             Margin="20"
             CornerRadius="15"
             HasShadow="False"
-            HorizontalOptions="CenterAndExpand"
+            HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_LIGHT}}"
         >

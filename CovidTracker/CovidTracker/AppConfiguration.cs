@@ -39,7 +39,7 @@ namespace CovidTracker
         // The location must have changed by at least a distance
         // of MINIMUM_DISTANCE_M meters for the device to trigger
         // a location change (Android, iOS)
-        public static readonly int MINIMUM_DISTANCE_M = 1;
+        public static readonly int MINIMUM_DISTANCE_M = 2;
 
         // Maximum number of locations the buffer can store, 3600 is equivalent to at least 60 minutes
         // If the network is down, the oldest location will be erased to make room for a newest location 

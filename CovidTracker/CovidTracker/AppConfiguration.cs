@@ -62,16 +62,16 @@ namespace CovidTracker
          *     E.g.
          *     $ ./version.sh 2.0.33
          * This will update all the following files properly:
-         *     XDocks.Android/Properties/AndroidManifest.xml
-         *     XDocks.Android/XDocks.Android.csproj
-         *     XDocks.iOS/Info.plist
-         *     XDocks.iOS/XDocks.iOS.csproj
-         *     XDocks.sln
-         *     XDocks/AppConfig.cs
-         *     XDocks/XDocks.csproj
+         *     CovidTracker.Android/Properties/AndroidManifest.xml
+         *     CovidTracker.Android/CovidTracker.Android.csproj
+         *     CovidTracker.iOS/Info.plist
+         *     CovidTracker.iOS/CovidTracker.iOS.csproj
+         *     CovidTracker.sln
+         *     CovidTracker/AppConfig.cs
+         *     CovidTracker/CovidTracker.csproj
          */
-        public static readonly string VERSION_NAME = "1.0.4";
-        public static readonly int VERSION_CODE = 010004;
+        public static readonly string VERSION_NAME = "1.0.5";
+        public static readonly int VERSION_CODE = 010005;
 
     }
 }

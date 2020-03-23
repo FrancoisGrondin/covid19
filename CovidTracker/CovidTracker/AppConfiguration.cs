@@ -24,8 +24,8 @@ namespace CovidTracker
          * SERVERS CONFIGURATION
          */
 
-        public static UriBuilder REGISTRATION_SERVER_URL = new UriBuilder("http", "192.168.0.103", 8000);
-        public static UriBuilder LOCATION_SERVER_URL = new UriBuilder("http", "192.168.0.103", 8000);
+        public static UriBuilder REGISTRATION_SERVER_URL = new UriBuilder("http", "192.222.192.89", 8000);
+        public static UriBuilder LOCATION_SERVER_URL = new UriBuilder("http", "192.222.192.89", 8000);
 
 
         /* ---------------------------------------------------------------------------------- 
@@ -39,11 +39,11 @@ namespace CovidTracker
         // The location must have changed by at least a distance
         // of MINIMUM_DISTANCE_M meters for the device to trigger
         // a location change (Android, iOS)
-        public static readonly int MINIMUM_DISTANCE_M = 2;
+        public static readonly int MINIMUM_DISTANCE_M = 1;
 
-        // Maximum number of locations the buffer can store, which is equivalent to roughly 30 minutes
+        // Maximum number of locations the buffer can store, 3600 is equivalent to at least 60 minutes
         // If the network is down, the oldest location will be erased to make room for a newest location 
-        public static readonly int LOCATIONS_BUFFER_MAX = 1800;
+        public static readonly int LOCATIONS_BUFFER_MAX = 3600;
 
         // Number of location changes to record before sending the bundle to the server
         public static readonly int LOCATIONS_SAMPLING_RATE = 3;

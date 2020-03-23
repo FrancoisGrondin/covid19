@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:l="clr-namespace:CovidTracker"
     xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:i18n="clr-namespace:CovidTracker.Localization;assembly=CovidTracker"
     x:Class="CovidTracker.SymptomsPage"
     BackgroundColor="#aa000000"
 >
@@ -41,7 +42,7 @@
                     FontAttributes="Bold"
                     FontSize="Title"
                     TextColor="{Binding Source={x:Static l:AppConfiguration.BG_WHITE}}"
-                    Text="Health Report"
+                    Text="{i18n:Localize HealthReportTitle}"
                     Padding="10"
                     BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_INFO}}"
                 />
@@ -178,7 +179,7 @@
                         CornerRadius="10"
                         TextColor="{Binding Source={x:Static l:AppConfiguration.BG_WHITE}}"
                         FontSize="Large"
-                        Text="Cancel"
+                        Text="{i18n:Localize CancelButton}"
                         BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_DANGER}}"
                         Command="{Binding CancelCommand}"
                     />
@@ -190,7 +191,7 @@
                         CornerRadius="10"
                         TextColor="{Binding Source={x:Static l:AppConfiguration.BG_WHITE}}"
                         FontSize="Large"
-                        Text="Report"
+                        Text="{i18n:Localize SendReportButton}"
                         BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_SUCCESS}}"
                         Command="{Binding ReportSymptomsCommand}"
                     />

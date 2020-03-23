@@ -1,9 +1,12 @@
 ﻿using System;
+using CovidTracker.Localization;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Pages;
+using Xamarin.Forms.Xaml;
 
 namespace CovidTracker
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SymptomsPage : PopupPage
     {
         public event EventHandler<SymptomsPageVM.Status> OnPageExit;
@@ -27,10 +30,10 @@ namespace CovidTracker
         void PageExit(object sender, SymptomsPageVM.Status status)
         {
             if (status == SymptomsPageVM.Status.Success) {
-                DisplayAlert("Report sent", "Thank you for letting us know. The information will stay confidential.", "OK");
+                DisplayAlert(LocResources.ReportSentTitle, LocResources.ReportSentBody, LocResources.Ok);
             }
             else if (status == SymptomsPageVM.Status.Error) {
-                DisplayAlert("Not sent", "The report could not be sent due to a network error. Please check your connection and try again.", "OK");
+                DisplayAlert(LocResources.ReportNotSentTitle, LocResources.ReportNotSentBody, LocResources.Ok);
             }
             OnPageExit(this, status);
             Navigation.PopPopupAsync(false);

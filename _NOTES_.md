@@ -1,10 +1,6 @@
 TODO APP
 ========
 
-Post-Prototype
-    - Connection to MS AppCenter
-    - Localize app
-
 
 NOTES SERVEUR
 =============

@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:l="clr-namespace:CovidTracker"
+    xmlns:i18n="clr-namespace:CovidTracker.Localization;assembly=CovidTracker"
     x:Class="CovidTracker.MainPage"
     BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
 >
@@ -85,7 +86,7 @@
                 VerticalTextAlignment="Center"
                 FontSize="Large"
                 TextColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
-                Text="Whatever relevant information we'd like to add about Covid Tracker"
+                Text="{i18n:Localize GeneralInformation}"
                 Padding="10"
             />
             </Frame>
@@ -113,7 +114,7 @@
                 CornerRadius="10"
                 TextColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
                 FontSize="Large"
-                Text="Health Report"
+                Text="{i18n:Localize HealthReportButton}"
                 BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_WARNING}}"
                 Clicked="OpenSymptomsPage"
             />
@@ -125,7 +126,7 @@
                 CornerRadius="10"
                 TextColor="{Binding Source={x:Static l:AppConfiguration.BG_WHITE}}"
                 FontSize="Large"
-                Text="Am I at Risk?"
+                Text="{i18n:Localize RiskQueryButton}"
                 BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_PRIMARY}}"
                 Command="{Binding QueryRiskCommand}"
             />

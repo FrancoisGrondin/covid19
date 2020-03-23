@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Unknown" xml:space="preserve">
+        <value>inconnu</value>
+    </data>
+    <data name="Ok" xml:space="preserve">
+        <value>OK</value>
+    </data>
+    <data name="GeneralInformation" xml:space="preserve">
+        <value>Bienvenue sur Covid Tracker. L'application suit votre position en arrière-plan et l'envoie à notre serveur. Les données sont gardées anonymes.</value>
+    </data>
+    <data name="HealthReportButton" xml:space="preserve">
+        <value>Rapport de santé</value>
+    </data>
+    <data name="HealthReportTitle" xml:space="preserve">
+        <value>Rapport de santé</value>
+    </data>
+    <data name="RiskQueryButton" xml:space="preserve">
+        <value>Suis-je à risque ?</value>
+    </data>
+    <data name="CancelButton" xml:space="preserve">
+        <value>Annuler</value>
+    </data>
+    <data name="SendReportButton" xml:space="preserve">
+        <value>Envoyer</value>
+    </data>
+    <data name="ReportSentTitle" xml:space="preserve">
+        <value>Rapport envoyé</value>
+    </data>
+    <data name="ReportSentBody" xml:space="preserve">
+        <value>Merci de nous avoir informé. Les informations resteront confidentielles.</value>
+    </data>
+    <data name="ReportNotSentTitle" xml:space="preserve">
+        <value>Erreur</value>
+    </data>
+    <data name="ReportNotSentBody" xml:space="preserve">
+        <value>Le rapport n'a pas pu être envoyé en raison d'une erreur réseau. Veuillez vérifier votre connexion et réessayer.</value>
+    </data>
+    <data name="RiskLevelTitle" xml:space="preserve">
+        <value>Niveau de risque</value>
+    </data>
+    <data name="RiskLevelBody" xml:space="preserve">
+        <value>D'après nos calculs, votre niveau de risque est : </value>
+    </data>
+    <data name="tested_positive" xml:space="preserve">
+        <value>Résultat du test positif</value>
+    </data>
+    <data name="fever" xml:space="preserve">
+        <value>Fièvre</value>
+    </data>
+    <data name="tiredeness" xml:space="preserve">
+        <value>Fatigue</value>
+    </data>
+    <data name="dry_cough" xml:space="preserve">
+        <value>Toux sèche</value>
+    </data>
+    <data name="aches_and_pains" xml:space="preserve">
+        <value>Douleurs et courbatures</value>
+    </data>
+    <data name="nasal_congestion" xml:space="preserve">
+        <value>Congestion nasale</value>
+    </data>
+    <data name="runny_nose" xml:space="preserve">
+        <value>Nez qui coule</value>
+    </data>
+    <data name="sore_throat" xml:space="preserve">
+        <value>Maux de gorge</value>
+    </data>
+    <data name="diarrhea" xml:space="preserve">
+        <value>Diarrhée</value>
+    </data>
+</root>

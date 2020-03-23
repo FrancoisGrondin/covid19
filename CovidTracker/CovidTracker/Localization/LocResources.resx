@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Unknown" xml:space="preserve">
+        <value>unknown</value>
+    </data>
+    <data name="Ok" xml:space="preserve">
+        <value>OK</value>
+    </data>
+    <data name="GeneralInformation" xml:space="preserve">
+        <value>Welcome to Covid Tracker. The app tracks your location in the background and sends it to our server. The data is kept anonymous.</value>
+    </data>
+    <data name="HealthReportButton" xml:space="preserve">
+        <value>Health report</value>
+    </data>
+    <data name="HealthReportTitle" xml:space="preserve">
+        <value>Health report</value>
+    </data>
+    <data name="RiskQueryButton" xml:space="preserve">
+        <value>Am I at risk?</value>
+    </data>
+    <data name="CancelButton" xml:space="preserve">
+        <value>Cancel</value>
+    </data>
+    <data name="SendReportButton" xml:space="preserve">
+        <value>Send</value>
+    </data>
+    <data name="ReportSentTitle" xml:space="preserve">
+        <value>Report sent</value>
+    </data>
+    <data name="ReportSentBody" xml:space="preserve">
+        <value>Thanks for letting us know. The information will remain confidential.</value>
+    </data>
+    <data name="ReportNotSentTitle" xml:space="preserve">
+        <value>Error</value>
+    </data>
+    <data name="ReportNotSentBody" xml:space="preserve">
+        <value>The report could not be sent due to a network error. Please check your connection and try again.</value>
+    </data>
+    <data name="RiskLevelTitle" xml:space="preserve">
+        <value>Your risk level</value>
+    </data>
+    <data name="RiskLevelBody" xml:space="preserve">
+        <value>According to our calculations your risk level is: </value>
+    </data>
+    <data name="tested_positive" xml:space="preserve">
+        <value>Tested positive</value>
+    </data>
+    <data name="fever" xml:space="preserve">
+        <value>Fever</value>
+    </data>
+    <data name="tiredeness" xml:space="preserve">
+        <value>Tiredeness</value>
+    </data>
+    <data name="dry_cough" xml:space="preserve">
+        <value>Dry cough</value>
+    </data>
+    <data name="aches_and_pains" xml:space="preserve">
+        <value>Aches and pain</value>
+    </data>
+    <data name="nasal_congestion" xml:space="preserve">
+        <value>Nasal congestion</value>
+    </data>
+    <data name="runny_nose" xml:space="preserve">
+        <value>Runny nose</value>
+    </data>
+    <data name="sore_throat" xml:space="preserve">
+        <value>Sore throat</value>
+    </data>
+    <data name="diarrhea" xml:space="preserve">
+        <value>Diarrhea</value>
+    </data>
+</root>

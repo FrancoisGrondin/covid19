@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using CovidTracker.Localization;
 using Xamarin.Forms;
 
 namespace CovidTracker
@@ -15,7 +16,7 @@ namespace CovidTracker
             ProcessingApiCall = ProcessState.RUNNING;
             string risk = await NetworkLayer.GetRisk();
             if (risk == null) {
-                risk = "unknown";
+                risk = LocResources.Unknown;
             }
             ProcessingApiCall = ProcessState.IDLE;
             OnRiskResult(this, risk);

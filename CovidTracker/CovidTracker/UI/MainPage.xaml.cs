@@ -1,14 +1,17 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading;
+using CovidTracker.Localization;
 using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace CovidTracker
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
         private SymptomsPage SymptomsPage;
@@ -50,7 +53,7 @@ namespace CovidTracker
 
         void RiskResult(System.Object sender, string risk)
         {
-            DisplayAlert("Your risk level", "According to our calculations your risk is level " + risk + ".", "OK");
+            DisplayAlert(LocResources.RiskLevelTitle, LocResources.RiskLevelBody + risk, LocResources.Ok);
         }
 
 
@@ -59,7 +62,7 @@ namespace CovidTracker
             string newIP = IpAddress.Text != null ? IpAddress.Text : IpAddress.Placeholder;
             AppConfiguration.REGISTRATION_SERVER_URL = new UriBuilder("http", newIP, 8000);
             AppConfiguration.LOCATION_SERVER_URL = new UriBuilder("http", newIP, 8000);
-            DisplayAlert("Updated", "Server IP updated to " + newIP + ".", "OK");
+            DisplayAlert("o_O", "---> " + newIP + " <---", "OK");
         }
     }
 }

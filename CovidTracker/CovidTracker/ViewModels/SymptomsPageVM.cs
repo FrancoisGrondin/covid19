@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -29,13 +30,14 @@ namespace CovidTracker
         public SymptomsPageVM()
         {
             foreach (FieldInfo field in typeof(Symptoms).GetFields()) {
+                if (field.Name.Equals("SymptomsDict")) {
+                    continue;
+                }
                 if (field.Name.Equals("tested_positive")) {
                     Symptom symptom = new Symptom(field.Name);
                     TestsList.Add(symptom);
                 }
-            }
-            foreach (FieldInfo field in typeof(Symptoms).GetFields()) {
-                if (!field.Name.Equals("tested_positive")) {
+                else {
                     Symptom symptom = new Symptom(field.Name);
                     SymptomsList.Add(symptom);
                 }

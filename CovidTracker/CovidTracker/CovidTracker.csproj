@@ -26,6 +26,7 @@
     <Folder Include="UI\" />
     <Folder Include="Network\" />
     <Folder Include="Models\" />
+    <Folder Include="Localization\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="UI\MainPage.xaml.cs">
@@ -36,5 +37,21 @@
       <DependentUpon>SymptomsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Localization\LocResources.Designer.cs">
+      <DependentUpon>LocResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Localization\LocResources.fr.Designer.cs">
+      <DependentUpon>LocResources.fr.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Localization\LocResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\LocResources.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocResources.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

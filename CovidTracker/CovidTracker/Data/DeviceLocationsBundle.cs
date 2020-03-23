@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace CovidTracker
@@ -27,10 +25,12 @@ namespace CovidTracker
             return (deviceLocations.Count + 1 > AppConfiguration.LOCATIONS_BUFFER_MAX);
         }
 
+
         public bool SampleFilled()
         {
             return (deviceLocations.Count % AppConfiguration.LOCATIONS_SAMPLING_RATE == 0);
         }
+
 
         public void AddLocation(DeviceLocation deviceLocation)
         {

@@ -1,5 +1,4 @@
-﻿using System;
-namespace CovidTracker
+﻿namespace CovidTracker
 {
     public class ServerResponse
     {

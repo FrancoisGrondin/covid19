@@ -8,6 +8,7 @@ namespace CovidTracker
     {
         public event EventHandler<string> OnRiskResult;
 
+
         public ICommand QueryRiskCommand => new Command(QueryRisk);
         async void QueryRisk()
         {

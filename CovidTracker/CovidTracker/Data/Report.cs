@@ -1,5 +1,4 @@
 ﻿using System;
-using Xamarin.Essentials;
 
 namespace CovidTracker
 {
@@ -9,6 +8,7 @@ namespace CovidTracker
         public string id;
         public long timestamp;
         public Symptoms symptoms;
+
 
         public Report(Symptoms symptoms)
         {

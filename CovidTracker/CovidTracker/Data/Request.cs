@@ -1,5 +1,4 @@
-﻿using System;
-namespace CovidTracker
+﻿namespace CovidTracker
 {
     public class Request
     {
@@ -8,6 +7,7 @@ namespace CovidTracker
 
         public string id;
         public string action;
+
 
         public Request(string action)
         {

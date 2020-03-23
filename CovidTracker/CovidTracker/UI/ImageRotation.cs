@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace CovidTracker
 {
@@ -7,6 +6,7 @@ namespace CovidTracker
     {
         public AnimationAction Action { get; set; }
         public enum AnimationAction { Start, Stop }
+
 
         protected override void Invoke(Image sender)
         {
@@ -20,10 +20,12 @@ namespace CovidTracker
             }
         }
 
+
         private void PerformAnimation(Image image)
         {
             image.RotateTo(4800, 20000, Easing.Linear);
         }
+
 
         private void CancelAnimation(Image myElement)
         {

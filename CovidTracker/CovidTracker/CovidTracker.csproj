@@ -22,6 +22,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="UI\" />
     <Folder Include="Network\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="UI\MainPage.xaml.cs">

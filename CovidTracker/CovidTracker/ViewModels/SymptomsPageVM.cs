@@ -1,21 +1,30 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace CovidTracker
 {
-    public class SymptomsPageVM
+    public class SymptomsPageVM : BaseVM
     {
-        public event EventHandler<bool> OnPageExit;
+        public enum Status
+        {
+            Success = 0,
+            Canceled = 1,
+            Error = 2
+        };
+
+        public event EventHandler<Status> OnPageExit;
 
         ObservableCollection<Symptom> _testsLists = new ObservableCollection<Symptom>();
         public ObservableCollection<Symptom> TestsList { get { return _testsLists; } }
 
         ObservableCollection<Symptom> _symptomsLists = new ObservableCollection<Symptom>();
         public ObservableCollection<Symptom> SymptomsList { get { return _symptomsLists; } }
+
 
         public SymptomsPageVM()
         {
@@ -33,6 +42,7 @@ namespace CovidTracker
             }
         }
 
+
         public ICommand ReportSymptomsCommand => new Command(ReportSymptoms);
         async void ReportSymptoms()
         {
@@ -43,17 +53,38 @@ namespace CovidTracker
             foreach (Symptom symptom in SymptomsList) {
                 typeof(Symptoms).GetField(symptom.Id).SetValue(symptoms, symptom.IsChecked);
             }
+
+            ProcessingApiCall = ProcessState.RUNNING;
+            bool success = await SendSymptoms(symptoms);
+            ProcessingApiCall = ProcessState.IDLE;
+
+            if (success) {
+                OnPageExit(this, Status.Success);
+            }
+            else {
+                OnPageExit(this, Status.Error);
+            }
+        }
+
+
+        private async Task<bool> SendSymptoms(Symptoms symptoms)
+        {
             Report report = new Report(symptoms);
             report.id = await LocationsAggregator.RetrieveId();
+            if (report.id == null) {
+                return false;
+            }
+
             string data = JsonConvert.SerializeObject(report);
-            NetworkLayer.SendDataToServer(data);
-            OnPageExit(this, true);
+            bool success = await NetworkLayer.SendDataToServer(data);
+            return success;
         }
+
 
         public ICommand CancelCommand => new Command(Cancel);
         void Cancel()
         {
-            OnPageExit(this, false);
+            OnPageExit(this, Status.Canceled);
         }
 
     }

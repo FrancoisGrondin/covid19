@@ -116,6 +116,10 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\loading.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\loading.imageset\loading.png" />
+    <ImageAsset Include="Assets.xcassets\loading.imageset\loading%402x.png" />
+    <ImageAsset Include="Assets.xcassets\loading.imageset\loading%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -135,5 +139,8 @@
       <Project>{6D1B3163-BF52-46EC-B9B4-3E2B87F77649}</Project>
       <Name>CovidTracker</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\loading.imageset\" />
   </ItemGroup>
 </Project>

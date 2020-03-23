@@ -18,6 +18,7 @@ namespace CovidTracker
         {
             if (SymptomsPage == null) {
                 SymptomsPage = new SymptomsPage();
+                SymptomsPage.OnPageExit += SymptomsPageExit;
             }
 
             return SymptomsPage;
@@ -27,28 +28,29 @@ namespace CovidTracker
         public MainPage()
         {
             InitializeComponent();
+            MainPageVM mainPageVM = new MainPageVM();
+            mainPageVM.OnRiskResult += RiskResult;
+            BindingContext = mainPageVM;
         }
 
 
-        async void ClickedSymptoms(System.Object sender, System.EventArgs e)
+        void OpenSymptomsPage(System.Object sender, System.EventArgs e)
         {
             if (0 == Interlocked.Exchange(ref ButtonLock, 1)) {
-                await Navigation.PushPopupAsync(GetSymptomsPage(), false);
-                ButtonLock = 0;
+                Navigation.PushPopupAsync(GetSymptomsPage(), false);
             }
         }
 
 
-        async void ClickedRisk(System.Object sender, System.EventArgs e)
+        void SymptomsPageExit(object sender, SymptomsPageVM.Status status)
         {
-            if (0 == Interlocked.Exchange(ref ButtonLock, 1)) {
-                string risk = await NetworkLayer.GetRisk();
-                if (risk == null) {
-                    risk = "unknown";
-                }
-                await DisplayAlert("Your risk level", "According to our calculations your risk is level " + risk + ".", "OK");
-                ButtonLock = 0;
-            }
+            ButtonLock = 0;
+        }
+
+
+        void RiskResult(System.Object sender, string risk)
+        {
+            DisplayAlert("Your risk level", "According to our calculations your risk is level " + risk + ".", "OK");
         }
 
 

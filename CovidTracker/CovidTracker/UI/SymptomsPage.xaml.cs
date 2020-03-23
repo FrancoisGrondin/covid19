@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Pages;
-using Xamarin.Forms;
 
 namespace CovidTracker
 {
     public partial class SymptomsPage : PopupPage
     {
-        public event EventHandler<bool> OnPageExit;
-
-        SymptomsPageVM SymptomsPageVM;
+        public event EventHandler<SymptomsPageVM.Status> OnPageExit;
 
         public SymptomsPage()
         {
             InitializeComponent();
-            SymptomsPageVM = new SymptomsPageVM();
-            SymptomsPageVM.OnPageExit += PageExit;
-            BindingContext = SymptomsPageVM;
+            SymptomsPageVM symptomsPageVM = new SymptomsPageVM();
+            symptomsPageVM.OnPageExit += PageExit;
+            BindingContext = symptomsPageVM;
             CloseWhenBackgroundIsClicked = false;
         }
 
@@ -28,14 +24,17 @@ namespace CovidTracker
         }
 
 
-        void PageExit(object sender, bool reportSent)
+        void PageExit(object sender, SymptomsPageVM.Status status)
         {
-            if (reportSent) {
+            if (status == SymptomsPageVM.Status.Success) {
                 DisplayAlert("Report sent", "Thank you for letting us know. The information will stay confidential.", "OK");
             }
+            else if (status == SymptomsPageVM.Status.Error) {
+                DisplayAlert("Not sent", "The report could not be sent due to a network error. Please check your connection and try again.", "OK");
+            }
+            OnPageExit(this, status);
             Navigation.PopPopupAsync(false);
         }
-
 
     }
 }

@@ -9,11 +9,19 @@
     x:Class="CovidTracker.MainPage"
     BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
 >
-    <StackLayout
+
+    <Grid
+        Margin="0"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"        
+    >
+        <StackLayout
+        Grid.Row="0"
+        Grid.Column="0"
         Spacing="0"
     >
 
-        <Label
+            <Label
             Margin="0"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="Start"
@@ -27,7 +35,7 @@
             BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_INFO}}"
         />
 
-        <Frame
+            <Frame
             Margin="20, 20, 20, 0"
             Padding="10"
             CornerRadius="15"
@@ -37,19 +45,19 @@
             BorderColor="{Binding Source={x:Static l:AppConfiguration.BG_INFO}}"
             BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
         >
-            <StackLayout
+                <StackLayout
                 Orientation="Horizontal"
                 Spacing="10"
                 Margin="0"
             >
-                <Entry
+                    <Entry
                     x:Name="IpAddress"
                     HorizontalOptions="FillAndExpand"
                     Placeholder="192.168.0.104"
                     Completed="NewServerIp"
                     BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_LIGHT}}"
                 />
-                <Button
+                    <Button
                     HorizontalOptions="End"
                     Padding="20, 10, 20, 10"
                     CornerRadius="10"
@@ -60,11 +68,11 @@
                     Clicked="NewServerIp"
                 />
 
-            </StackLayout>
-        </Frame>
+                </StackLayout>
+            </Frame>
 
 
-        <Frame
+            <Frame
             Margin="20"
             CornerRadius="15"
             HasShadow="False"
@@ -72,7 +80,7 @@
             VerticalOptions="FillAndExpand"
             BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_LIGHT}}"
         >
-            <Label
+                <Label
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center"
                 FontSize="Large"
@@ -80,25 +88,25 @@
                 Text="Whatever relevant information we'd like to add about Covid Tracker"
                 Padding="10"
             />
-        </Frame>
+            </Frame>
 
 
-        <Grid
+            <Grid
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="End"
             RowSpacing="20"
             Margin="0, 0, 0, 20"
         >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
 
-            <Button
+                <Button
                 Grid.Row="0"
                 Grid.Column="0"
                 Padding="20, 10, 20, 10"
@@ -107,10 +115,10 @@
                 FontSize="Large"
                 Text="Health Report"
                 BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_WARNING}}"
-                Clicked="ClickedSymptoms"
+                Clicked="OpenSymptomsPage"
             />
 
-            <Button
+                <Button
                 Grid.Row="1"
                 Grid.Column="0"
                 Padding="20, 10, 20, 10"
@@ -119,9 +127,50 @@
                 FontSize="Large"
                 Text="Am I at Risk?"
                 BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_PRIMARY}}"
-                Clicked="ClickedRisk"
+                Command="{Binding QueryRiskCommand}"
             />
-        </Grid>
+            </Grid>
 
-    </StackLayout>
+        </StackLayout>
+
+
+        <Image
+            Grid.Row="0"
+            Grid.Column="0"
+            Source="loading"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand"
+            IsVisible="False"
+        >
+            <Image.Triggers>
+                <DataTrigger TargetType="Image"
+                             Binding="{Binding ProcessingApiCall}"
+                             Value="RUNNING">
+                    <Setter Property="IsVisible" Value="true" />
+                </DataTrigger>
+                <DataTrigger TargetType="Image"
+                             Binding="{Binding ProcessingApiCall}"
+                             Value="IDLE">
+                    <Setter Property="IsVisible" Value="false" />
+                </DataTrigger>
+                <DataTrigger TargetType="Image"
+                             Binding="{Binding ProcessingApiCall}"
+                             Value="RUNNING">
+                    <DataTrigger.EnterActions>
+                        <l:ImageRotation Action="Start" />
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+                <DataTrigger TargetType="Image"
+                             Binding="{Binding ProcessingApiCall}"
+                             Value="IDLE">
+                    <DataTrigger.EnterActions>
+                        <l:ImageRotation Action="Stop" />
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Image.Triggers>
+        </Image>
+
+    </Grid>
+
+
 </ContentPage>

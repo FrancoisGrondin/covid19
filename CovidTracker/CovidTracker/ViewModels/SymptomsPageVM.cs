@@ -44,7 +44,7 @@ namespace CovidTracker
                 typeof(Symptoms).GetField(symptom.Id).SetValue(symptoms, symptom.IsChecked);
             }
             Report report = new Report(symptoms);
-            report.id = await LocationsAggregator.CheckOrGetId();
+            report.id = await LocationsAggregator.RetrieveId();
             string data = JsonConvert.SerializeObject(report);
             NetworkLayer.SendDataToServer(data);
             OnPageExit(this, true);

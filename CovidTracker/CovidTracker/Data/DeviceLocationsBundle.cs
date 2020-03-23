@@ -24,14 +24,22 @@ namespace CovidTracker
 
         public bool IsFull()
         {
-            return (deviceLocations.Count + 1 > AppConfiguration.LOCATIONS_BUFFER);
+            return (deviceLocations.Count + 1 > AppConfiguration.LOCATIONS_BUFFER_MAX);
         }
 
+        public bool SampleFilled()
+        {
+            return (deviceLocations.Count % AppConfiguration.LOCATIONS_SAMPLING_RATE == 0);
+        }
 
         public void AddLocation(DeviceLocation deviceLocation)
         {
+            if (IsFull()) {
+                Debug.WriteLine("Buffer is full, removing oldest element", "[DeviceLocationsBundle]");
+                this.deviceLocations.RemoveAt(0);
+            }
             this.deviceLocations.Add(deviceLocation);
-            Debug.WriteLine("Recorded locations: " + deviceLocations.Count);
+            Debug.WriteLine("Recorded: " + deviceLocations.Count, "[DeviceLocationsBundle]");
         }
 
 

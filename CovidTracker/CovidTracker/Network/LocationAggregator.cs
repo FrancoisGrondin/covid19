@@ -17,7 +17,7 @@ namespace CovidTracker
         public static async Task<LocationsAggregator> GetInstance()
         {
             if (Instance == null) {
-                string id = await CheckOrGetId();
+                string id = await RetrieveId();
                 Instance = new LocationsAggregator(id);
             }
 
@@ -25,10 +25,10 @@ namespace CovidTracker
         }
 
 
-        public static async Task<string> CheckOrGetId()
+        public static async Task<string> RetrieveId()
         {
-            string id = Preferences.Get(AppConfiguration.PREF_ID, "null");
-            if (id.Equals("null")) {
+            string id = Preferences.Get(AppConfiguration.PREF_ID, null);
+            if (id == null) {
                 id = await NetworkLayer.RegisterAndGetId();
                 // Get ID from network
                 Preferences.Set(AppConfiguration.PREF_ID, id);
@@ -43,19 +43,33 @@ namespace CovidTracker
         }
 
 
-        public async Task RecordLocation(double latitude, double longitude,
-                                         double? speed, double? course, double? accuracy)
+        public void RecordLocation(double latitude, double longitude,
+                                   double? speed, double? course, double? accuracy)
         {
-            DeviceLocationsBundle.id = await CheckOrGetId();
             DeviceLocationsBundle.AddLocation(new DeviceLocation(latitude, longitude, speed, course, accuracy));
-            if (DeviceLocationsBundle.IsFull()) {
-                string data = JsonConvert.SerializeObject(DeviceLocationsBundle);
-                await NetworkLayer.SendDataToServer(data);
-                DeviceLocationsBundle.ClearLocations();
+
+            if (DeviceLocationsBundle.SampleFilled()) {
+                SendDataToServer();
+            }
+        }
+
+        private async void SendDataToServer()
+        {
+            // Before sending, make sure we have an Id. Do not send if we can't retrieve it
+            DeviceLocationsBundle.id = await RetrieveId();
+            if (DeviceLocationsBundle.id == null) {
+                return;
             }
 
+            string data = JsonConvert.SerializeObject(DeviceLocationsBundle);
+            bool success = await NetworkLayer.SendDataToServer(data);
+            if (success) {
+                DeviceLocationsBundle.ClearLocations();
+            }
         }
 
 
     }
+
+
 }

@@ -41,10 +41,10 @@ namespace CovidTracker.iOS
 
                 LocationsAggregator = await LocationsAggregator.GetInstance();
 
-                LocationManager.LocationsUpdated += async (object sender, CLLocationsUpdatedEventArgs e) => {
+                LocationManager.LocationsUpdated += (object sender, CLLocationsUpdatedEventArgs e) => {
                     foreach (CLLocation location in e.Locations) {
-                        await LocationsAggregator.RecordLocation(location.Coordinate.Longitude, location.Coordinate.Latitude,
-                                                                 location.Course, location.Speed, location.HorizontalAccuracy);
+                        LocationsAggregator.RecordLocation(location.Coordinate.Longitude, location.Coordinate.Latitude,
+                                                           location.Course, location.Speed, location.HorizontalAccuracy);
                     }
                 };
 

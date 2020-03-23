@@ -40,8 +40,12 @@ namespace CovidTracker
         // a location change (Android, iOS)
         public static readonly int MINIMUM_DISTANCE_M = 2;
 
+        // Maximum number of locations the buffer can store, which is equivalent to roughly 30 minutes
+        // If the network is down, the oldest location will be erased to make room for a newest location 
+        public static readonly int LOCATIONS_BUFFER_MAX = 1800;
+
         // Number of location changes to record before sending the bundle to the server
-        public static readonly int LOCATIONS_BUFFER = 3;
+        public static readonly int LOCATIONS_SAMPLING_RATE = 3;
 
 
         /* ---------------------------------------------------------------------------------- 

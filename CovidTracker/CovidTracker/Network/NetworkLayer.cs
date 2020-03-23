@@ -27,7 +27,7 @@ namespace CovidTracker
             HttpClient client = new HttpClient();
             Request request = new Request(action);
             if (addId) {
-                request.id = await LocationsAggregator.CheckOrGetId();
+                request.id = await LocationsAggregator.RetrieveId();
             }
             string requestString = JsonConvert.SerializeObject(request);
             Debug.WriteLine(requestString, "[IssueRequest]");

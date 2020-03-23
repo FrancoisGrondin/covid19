@@ -93,15 +93,15 @@ namespace CovidTracker.Droid
             LocationsAggregator = await LocationsAggregator.GetInstance();
 
             LocationManager locationManager = (LocationManager)this.GetSystemService(Context.LocationService);
-            locationManager.RequestLocationUpdates(LocationManager.GpsProvider,
-                                                   AppConfiguration.MINIMUM_TIME_MS, AppConfiguration.MINIMUM_DISTANCE_M, this);
+            locationManager.RequestLocationUpdates(LocationManager.GpsProvider, AppConfiguration.MINIMUM_TIME_MS,
+                                                   AppConfiguration.MINIMUM_DISTANCE_M, this);
         }
 
 
-        public async void OnLocationChanged(Location location)
+        public void OnLocationChanged(Location location)
         {
-            await LocationsAggregator.RecordLocation(location.Longitude, location.Latitude,
-                                                     location.Bearing, location.Speed, location.Accuracy);
+            LocationsAggregator.RecordLocation(location.Longitude, location.Latitude,
+                                               location.Bearing, location.Speed, location.Accuracy);
         }
 
 

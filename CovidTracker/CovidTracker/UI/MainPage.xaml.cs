@@ -57,11 +57,12 @@ namespace CovidTracker
         }
 
 
-        void NewServerIp(System.Object sender, System.EventArgs e)
+        async void NewServerIp(System.Object sender, System.EventArgs e)
         {
             string newIP = IpAddress.Text != null ? IpAddress.Text : IpAddress.Placeholder;
             AppConfiguration.REGISTRATION_SERVER_URL = new UriBuilder("http", newIP, 8000);
             AppConfiguration.LOCATION_SERVER_URL = new UriBuilder("http", newIP, 8000);
+            await LocationsAggregator.RetrieveId(true);
             DisplayAlert("o_O", "---> " + newIP + " <---", "OK");
         }
     }

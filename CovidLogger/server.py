@@ -15,9 +15,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 		content_len = int(self.headers.get('content-length'))
 		post_body = self.rfile.read(content_len)
-		print(post_body)
 		data_in = json.loads(post_body)
-		print(data_in['action'])
 
 		ip = self.client_address[0]
 

@@ -7,6 +7,7 @@ import os
 import random
 import threading
 import time
+import random
 
 class RequestHandler(BaseHTTPRequestHandler):
 
@@ -123,12 +124,38 @@ class RequestHandler(BaseHTTPRequestHandler):
 				level = 50
 
 				reply = { 'level': level }
+				data_out = json.dumps(reply).encode()
+				print(data_out)
+
+				self.send_response(200)
+				self.end_headers()
+
+				self.wfile.write(data_out)
+
+			if data_in['action'] == 'map':
+
+				# Begin TEMP
+				# Random generation for now
+				# TODO - get timestamp and dig values from recorded data
+				lat = 45.51997
+				lon = -73.61624
+				dots = []
+
+				for x in range(5):
+					nlat = lat + random.random() / 100
+					nlon = lon + random.random() / 100
+					contracted = (random.random() > .5)
+					dots.append({ 'latitude': nlat, 'longitude': nlon, 'contracted': contracted })
+				# End TEMP
+
+				reply = { 'dots': dots }
 				data_out = json.dumps(reply).encode()	
 
 				self.send_response(200)
 				self.end_headers()
 
 				self.wfile.write(data_out)
+
 
 class Server(ThreadingHTTPServer):
 

@@ -70,8 +70,8 @@ namespace CovidTracker
          *     CovidTracker/AppConfig.cs
          *     CovidTracker/CovidTracker.csproj
          */
-        public static readonly string VERSION_NAME = "1.0.5";
-        public static readonly int VERSION_CODE = 010005;
+        public static readonly string VERSION_NAME = "1.0.6";
+        public static readonly int VERSION_CODE = 010006;
 
     }
 }

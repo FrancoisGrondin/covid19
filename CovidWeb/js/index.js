@@ -26,46 +26,35 @@ function initialize()
 
 function query_and_plot_data()
 {
-    // TEMPORARY CODE TO SHOW THE POTENTIAL
-    // TODO -- Replace by a query to the API
-    /* Possible JSON return from API:
-       {
-           [
-               {
-                   lat: 45.51997,
-                   lon: -73.61624,
-                   contracted: true
-               },
-               {
-                   lat: 45.41263,
-                   lon: -73.85912,
-                   contracted: true
-               },
-               ...
-           ]
-       }        
-    */
-    lat = 45.51997;
-    lon = -73.61624;
-    for (let step = 0; step < 500; step++) {
-        add_marker((lat + (Math.random() / 100)), (lon + (Math.random() / 100)), (Math.random() > 0.5));
-    }
+    $.ajax ({
+        url:"http://192.168.0.104:8000",
+        method:"POST",
+        data:'{"action":"map"}',
+        success:function(response)
+        {
+            response.dots.forEach(dot => add_marker(dot.latitude, dot.longitude, dot.contracted));
+        },
+        error:function(response)
+        {
+            console.log("ERREUR");
+        }
+    });
 }
 
 
 function add_marker(latitude, longitude, contracted = false)
 {
     if (contracted) {
-        icon = 'red.png'
+        icon = 'images/red.png'
     }
     else {
-        icon = 'blue.png'
+        icon = 'images/blue.png'
     }
 
     // show a marker on the map
     var dot = new L.Icon({
         iconUrl: icon,
-        iconSize: [10, 10],
+        iconSize: [5, 5],
         iconAnchor: [5, 5],
         popupAnchor: [5, 5],
         shadowSize: [0, 0]

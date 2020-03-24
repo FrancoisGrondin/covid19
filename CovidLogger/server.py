@@ -15,7 +15,9 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 		content_len = int(self.headers.get('content-length'))
 		post_body = self.rfile.read(content_len)
+		print(post_body)
 		data_in = json.loads(post_body)
+		print(data_in['action'])
 
 		ip = self.client_address[0]
 
@@ -141,7 +143,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 				lon = -73.61624
 				dots = []
 
-				for x in range(5):
+				for x in range(500):
 					nlat = lat + random.random() / 100
 					nlon = lon + random.random() / 100
 					contracted = (random.random() > .5)

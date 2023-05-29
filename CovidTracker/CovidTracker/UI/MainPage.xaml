@@ -9,6 +9,8 @@
     xmlns:i18n="clr-namespace:CovidTracker.Localization;assembly=CovidTracker"
     x:Class="CovidTracker.MainPage"
     BackgroundColor="{Binding Source={x:Static l:AppConfiguration.BG_DARK}}"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+    ios:Page.UseSafeArea="true"
 >
 
     <Grid

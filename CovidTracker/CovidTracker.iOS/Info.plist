@@ -37,16 +37,14 @@
 	<string>Track phone position</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Track phone position</string>
+	<key>AllowsBackgroundLocationUpdates</key>
+	<string>Track phone position in the background</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
 		<string>processing</string>
 	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>UIStatusBarHidden</key>
-	<true/>
-	<key>UIRequiresFullScreen</key>
-	<true/>
+	<key>NSLocationUsageDescription</key>
+	<string>Track phone position</string>
 </dict>
 </plist>

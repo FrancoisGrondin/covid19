@@ -29,6 +29,10 @@ namespace CovidTracker.iOS
 
         }
 
+        public CLLocationManager LocMgr {
+            get { return this.LocationManager; }
+        }
+
 
         public async void StartLocationUpdates()
         {
@@ -36,8 +40,11 @@ namespace CovidTracker.iOS
             // the popover when the app is first launched, or by changing the permissions for the app in Settings
             if (CLLocationManager.LocationServicesEnabled) {
                 //set the desired accuracy, in meters
-                LocationManager.DesiredAccuracy = CLLocation.AccuracyBest;
+                LocationManager.DesiredAccuracy = 1;
                 LocationManager.DistanceFilter = AppConfiguration.MINIMUM_DISTANCE_M;
+                LocationManager.ShowsBackgroundLocationIndicator = true;
+                LocationManager.AllowsBackgroundLocationUpdates = true;
+                LocationManager.RequestAlwaysAuthorization();
 
                 LocationsAggregator = await LocationsAggregator.GetInstance();
 

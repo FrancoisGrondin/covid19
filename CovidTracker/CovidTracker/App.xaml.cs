@@ -13,7 +13,6 @@ namespace CovidTracker
 
             MainPage = new MainPage();
 
-
         }
 
         protected override void OnStart()

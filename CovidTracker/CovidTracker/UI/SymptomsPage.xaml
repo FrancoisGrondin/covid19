@@ -7,6 +7,8 @@
     xmlns:i18n="clr-namespace:CovidTracker.Localization;assembly=CovidTracker"
     x:Class="CovidTracker.SymptomsPage"
     BackgroundColor="#aa000000"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+    ios:Page.UseSafeArea="true"
 >
 
     <Frame
